@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="es-CO">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="Jey Avila Music" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0B0B0B" />
+
+    <title>Jey Avila Music | Tienda oficial</title>
+    <meta name="description" content="Tienda oficial de Jey Avila, cantante de champeta de Córdoba, Colombia. Productos oficiales con envíos a todo Colombia." />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+
+    <!-- Valores por defecto para compartir el sitio; cada página los ajusta al cargar (ver src/utils/seo.js) -->
+    <meta property="og:site_name" content="Jey Avila Music" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="es_CO" />
+    <meta property="og:title" content="Jey Avila Music | Tienda oficial" />
+    <meta property="og:description" content="Productos oficiales de Jey Avila con envíos a todo Colombia." />
+    <meta property="og:url" content="%VITE_PUBLIC_SITE_URL%/" />
+    <meta property="og:image" content="%VITE_PUBLIC_SITE_URL%/og-jey-avila-tienda.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Jey Avila Music | Tienda oficial" />
+    <meta name="twitter:description" content="Productos oficiales de Jey Avila con envíos a todo Colombia." />
+    <meta name="twitter:image" content="%VITE_PUBLIC_SITE_URL%/og-jey-avila-tienda.jpg" />
+
+    <!-- Datos estructurados del negocio (visibles para buscadores sin ejecutar JavaScript) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebSite",
+          "@id": "%VITE_PUBLIC_SITE_URL%/#website",
+          "url": "%VITE_PUBLIC_SITE_URL%/",
+          "name": "Jey Avila Music",
+          "inLanguage": "es-CO"
+        },
+        {
+          "@type": "Store",
+          "@id": "%VITE_PUBLIC_SITE_URL%/#negocio",
+          "name": "Jey Avila Music",
+          "url": "%VITE_PUBLIC_SITE_URL%/",
+          "description": "Tienda oficial de Jey Avila, cantante de champeta de Córdoba, Colombia, con envíos a todo Colombia.",
+          "logo": "%VITE_PUBLIC_SITE_URL%/logos/logo-negro.png",
+          "image": "%VITE_PUBLIC_SITE_URL%/og-jey-avila-tienda.jpg",
+          "telephone": "+57 302 568 0189",
+          "address": {
+            "@type": "PostalAddress",
+            "addressRegion": "Córdoba",
+            "addressCountry": "CO"
+          },
+          "areaServed": { "@type": "Country", "name": "Colombia" },
+          "currenciesAccepted": "COP",
+          "sameAs": [
+            "https://www.instagram.com/jey_avilamusic",
+            "https://www.tiktok.com/@jeyavilamusic1",
+            "https://www.youtube.com/@Jey%C3%81vilamusic",
+            "https://open.spotify.com/artist/5E2BC9ixsSVmoP2rkXO0L5",
+            "https://www.facebook.com/share/15szJJq4Ck/"
+          ]
+        }
+      ]
+    }
+    </script>
+
+    <!-- Si ya hay una copia guardada de los banners (ver src/services/bannerService.js), empieza a
+         descargar el primero desde ya, en paralelo al JavaScript, para que esté listo cuando la
+         portada se pinte y no aparezca "de golpe". -->
+    <script>
+      (function () {
+        try {
+          var b = JSON.parse(localStorage.getItem('banners:v1:hero'));
+          var u = b && b[0] && b[0].tipo !== 'video' && b[0].url;
+          if (u) {
+            var l = document.createElement('link');
+            l.rel = 'preload';
+            l.as = 'image';
+            l.href = u;
+            document.head.appendChild(l);
+          }
+        } catch (e) {}
+      })();
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;800;900&family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script src="https://accounts.google.com/gsi/client" async></script>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

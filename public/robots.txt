@@ -1,0 +1,18 @@
+User-agent: *
+Allow: /
+
+# Páginas privadas o sin contenido propio: no tiene sentido que aparezcan en buscadores.
+Disallow: /carrito
+Disallow: /login
+Disallow: /registro
+Disallow: /verificar
+Disallow: /restablecer
+Disallow: /mis-compras
+Disallow: /pedido/
+Disallow: /configuracion
+Disallow: /notificaciones
+Disallow: /favoritos
+Disallow: /busqueda
+
+# PENDIENTE: cambiar al dominio real de la tienda
+Sitemap: https://tienda.jeyavila.com/sitemap.xml
