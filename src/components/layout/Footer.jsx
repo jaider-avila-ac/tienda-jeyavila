@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { Instagram, Youtube, Music2, MapPin, Phone } from 'lucide-react'
+import { Instagram, Facebook, Youtube, Music2, MapPin, Phone, Mail } from 'lucide-react'
 import { NEGOCIO, REDES_JEY } from '../../data/negocio'
 
 // Duraciones fijas (no aleatorias) para que no cambien entre renders — igual que en su sitio
@@ -45,6 +45,7 @@ const REDES = [
   { icon: IconTikTok, href: REDES_JEY.tiktok, label: 'TikTok' },
   { icon: Youtube, href: REDES_JEY.youtube, label: 'YouTube' },
   { icon: Music2, href: REDES_JEY.spotify, label: 'Spotify' },
+  { icon: Facebook, href: REDES_JEY.facebook, label: 'Facebook' },
   { icon: IconWhatsApp, href: NEGOCIO.whatsappUrl, label: 'WhatsApp' },
 ]
 
@@ -58,7 +59,7 @@ const INFO_LINKS = [
 export default function Footer() {
   return (
     <footer className="bg-black text-white border-t-2 border-accent mt-16">
-      <div className="max-w-3xl mx-auto px-6 py-14 flex flex-col items-center text-center">
+      <div className="max-w-5xl mx-auto px-6 py-14 flex flex-col items-center text-center">
 
         {/* Logo */}
         <img src="/logos/logo-blanco.png" alt="Jey Avila Music" width="800" height="334" className="h-16 w-auto mb-4" />
@@ -98,7 +99,7 @@ export default function Footer() {
         </nav>
 
         {/* Contacto */}
-        <div className="border border-white/10 px-6 py-4 mt-8 flex flex-col sm:flex-row items-center gap-3 sm:gap-6">
+        <div className="border border-white/10 px-6 py-4 mt-8 flex flex-col lg:flex-row items-center gap-3 lg:gap-6">
           <a
             href={NEGOCIO.whatsappUrl}
             target="_blank"
@@ -107,13 +108,17 @@ export default function Footer() {
           >
             <Phone size={14} className="text-accent flex-shrink-0" />{NEGOCIO.whatsappVisible}
           </a>
-          <span className="hidden sm:block w-px h-4 bg-white/20" />
-          <p className="flex items-center gap-2 text-sm text-neutral-300">
+          <span className="hidden lg:block w-px h-4 bg-white/20" />
+          <a href={`mailto:${NEGOCIO.email}`} className="flex items-center gap-2 whitespace-nowrap text-sm text-neutral-300 hover:text-white transition-colors">
+            <Mail size={14} className="text-accent flex-shrink-0" />{NEGOCIO.email}
+          </a>
+          <span className="hidden lg:block w-px h-4 bg-white/20" />
+          <p className="flex items-center gap-2 whitespace-nowrap text-sm text-neutral-300">
             <MapPin size={14} className="text-accent flex-shrink-0" />
-            <span>{NEGOCIO.ciudad}</span>
+            <span>{NEGOCIO.direccion}</span>
           </p>
-          <span className="hidden sm:block w-px h-4 bg-white/20" />
-          <p className="text-sm text-neutral-300">
+          <span className="hidden lg:block w-px h-4 bg-white/20" />
+          <p className="whitespace-nowrap text-sm text-neutral-300">
             <span className="text-neutral-500">Horario:</span> {NEGOCIO.horarioCorto}
           </p>
         </div>

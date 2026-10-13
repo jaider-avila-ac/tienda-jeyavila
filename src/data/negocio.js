@@ -1,16 +1,16 @@
-// Datos del negocio de Jey Avila Music. Única fuente para las páginas legales y el footer — si
-// algo cambia, se cambia solo acá. Los marcados PENDIENTE deben confirmarse con Jey antes de
-// publicar la tienda (las páginas legales los muestran tal cual).
+// Datos del negocio de Jey Avila Music (entregados por el cliente, octubre de 2026; redes y
+// WhatsApp tomados de su sitio web). Única fuente para las páginas legales y el footer — si algo
+// cambia, se cambia solo acá.
 export const NEGOCIO = {
   nombre: 'Jey Avila Music',
-  naturaleza: 'persona natural', // PENDIENTE: confirmar (persona natural o empresa)
-  ciudad: 'Córdoba, Colombia', // PENDIENTE: municipio exacto
-  direccion: '[PENDIENTE: dirección]', // PENDIENTE: dirección para devoluciones (la exige la ley en las páginas legales)
-  email: '[PENDIENTE: correo]', // PENDIENTE: correo de la tienda (lo exige la ley en las páginas legales)
+  naturaleza: 'persona natural',
+  ciudad: 'San Antero, Córdoba, Colombia',
+  direccion: 'San Antero, Córdoba',
+  email: 'javilamusic18@gmail.com',
   whatsappVisible: '302 568 0189',
   whatsappUrl: 'https://wa.me/573025680189',
-  horario: '[PENDIENTE: horario de atención]', // PENDIENTE: horario de atención
-  horarioCorto: '[PENDIENTE]',
+  horario: 'lunes a viernes de 8:00 a. m. a 12:00 m. y de 2:00 p. m. a 6:00 p. m.',
+  horarioCorto: 'Lun–Vie 8am–12m · 2pm–6pm',
   actualizado: 'octubre de 2026',
 }
 
