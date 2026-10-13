@@ -6,7 +6,7 @@ import { NEGOCIO } from '../../../data/negocio'
 export default function LlamadoJey() {
   return (
     <section className="max-w-7xl mx-auto px-4 pt-12">
-      <div className="grid md:grid-cols-2 border border-white/10 overflow-hidden">
+      <div className="grid md:grid-cols-2 border border-neutral-200 overflow-hidden">
         <div className="relative h-56 sm:h-64 bg-accent overflow-hidden">
           <img src="/img/silueta.jpg" alt="" width="628" height="628" loading="lazy"
             className="absolute -left-6 bottom-0 h-[115%] w-auto mix-blend-multiply" />

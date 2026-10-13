@@ -19,13 +19,13 @@ import { applyPageSeo } from '../../../utils/seo'
 function TituloSeccion({ children, icono, to, verTodo = 'Ver todos' }) {
   return (
     <div className="flex items-end justify-between gap-4 mb-5">
-      <h2 className="flex items-center gap-3 font-display text-sm sm:text-base font-black uppercase tracking-wide text-white">
+      <h2 className="flex items-center gap-3 font-display text-sm sm:text-base font-black uppercase tracking-wide text-neutral-900">
         <span className="w-1 h-5 bg-accent" aria-hidden="true" />
         {icono}
         {children}
       </h2>
       {to && (
-        <Link to={to} className="flex-shrink-0 text-[11px] font-semibold uppercase tracking-[0.15em] text-neutral-400 hover:text-white transition-colors flex items-center gap-1">
+        <Link to={to} className="flex-shrink-0 text-[11px] font-semibold uppercase tracking-[0.15em] text-neutral-500 hover:text-neutral-900 transition-colors flex items-center gap-1">
           {verTodo} <ArrowRight size={12} />
         </Link>
       )}
@@ -260,13 +260,13 @@ export default function HomePage() {
       )}
 
       <div
-        className={hasHero ? 'relative z-10 bg-aux' : undefined}
+        className="relative z-10 bg-white"
         style={hasHero ? { marginTop: HERO_H } : undefined}
       >
 
       {!backendOnline && (
         <div className="max-w-7xl mx-auto px-4 pt-10">
-          <p className="text-sm text-neutral-400 text-center bg-superficie-2 py-4">
+          <p className="text-sm text-neutral-500 text-center bg-neutral-100 py-4">
             No pudimos conectar con el servidor. Verifica tu conexión e intenta de nuevo.
           </p>
         </div>
@@ -304,7 +304,7 @@ export default function HomePage() {
                 {cat.subcategorias.map((sub) => (
                   <Link key={sub}
                     to={`/catalogo?categoria=${cat.id}&subcategoria=${encodeURIComponent(sub)}`}
-                    className="flex-shrink-0 text-[11px] font-medium text-neutral-400 hover:text-white border border-white/15 hover:border-accent px-2.5 py-1 transition-colors">
+                    className="flex-shrink-0 text-[11px] font-medium text-neutral-500 hover:text-neutral-900 border border-neutral-200 hover:border-accent px-2.5 py-1 transition-colors">
                     {sub}
                   </Link>
                 ))}
@@ -323,7 +323,7 @@ export default function HomePage() {
       {/* ── Vistos recientemente ── */}
       {recientes.length > 0 && (
         <section className="max-w-7xl mx-auto px-4 pt-10">
-          <TituloSeccion icono={<Clock size={16} className="text-neutral-400" />}>Vistos recientemente</TituloSeccion>
+          <TituloSeccion icono={<Clock size={16} className="text-neutral-500" />}>Vistos recientemente</TituloSeccion>
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
             {recientes.slice(0, 4).map((p) => <ProductCard key={p.id} product={p} />)}
           </div>

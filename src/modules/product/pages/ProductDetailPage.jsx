@@ -838,7 +838,7 @@ export default function ProductDetailPage() {
                       onChange={(e) => setFormComentario(e.target.value)}
                       placeholder="Tu comentario (opcional)"
                       rows={3}
-                      className="mt-3 w-full text-sm border-2 border-neutral-200 px-3 py-2 focus:outline-none focus:border-accent transition-colors resize-none"
+                      className="mt-3 w-full text-sm bg-white text-neutral-900 border-2 border-neutral-200 px-3 py-2 focus:outline-none focus:border-accent transition-colors resize-none"
                     />
                     {errorResena && (
                       <p className="text-xs text-red-500 flex items-center gap-1 mt-1.5">
@@ -889,7 +889,7 @@ export default function ProductDetailPage() {
                           value={textoEditado}
                           onChange={(e) => setTextoEditado(e.target.value)}
                           rows={2}
-                          className="w-full text-sm border-2 border-neutral-200 px-3 py-2 focus:outline-none focus:border-accent transition-colors resize-none"
+                          className="w-full text-sm bg-white text-neutral-900 border-2 border-neutral-200 px-3 py-2 focus:outline-none focus:border-accent transition-colors resize-none"
                         />
                         <div className="flex gap-2 mt-1.5">
                           <button onClick={() => handleGuardarEdicionPregunta(p.id)}
@@ -947,7 +947,7 @@ export default function ProductDetailPage() {
                   onChange={(e) => setFormPregunta(e.target.value)}
                   placeholder={isAuthenticated ? 'Escribe tu pregunta…' : 'Inicia sesión para preguntar'}
                   rows={2}
-                  className="w-full text-sm border-2 border-neutral-200 px-3 py-2 focus:outline-none focus:border-accent transition-colors resize-none"
+                  className="w-full text-sm bg-white text-neutral-900 border-2 border-neutral-200 px-3 py-2 focus:outline-none focus:border-accent transition-colors resize-none"
                 />
                 {errorPregunta && (
                   <p className="text-xs text-red-500 flex items-center gap-1 mt-1.5">
