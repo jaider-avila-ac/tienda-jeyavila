@@ -142,7 +142,7 @@ export default function CatalogPage() {
             <button
               onClick={() => setFilter('subcategoria', '')}
               className={`flex-shrink-0 px-3 py-1.5 text-xs font-semibold border transition-all ${
-                !activeSub ? 'bg-accent text-white border-accent' : 'border-gray-200 text-gray-600 hover:border-accent'
+                !activeSub ? 'bg-accent text-white border-accent' : 'border-white/15 text-neutral-300 hover:border-accent'
               }`}
             >
               Todo
@@ -152,7 +152,7 @@ export default function CatalogPage() {
                 key={sub}
                 onClick={() => setFilter('subcategoria', activeSub === sub ? '' : sub)}
                 className={`flex-shrink-0 px-3 py-1.5 text-xs font-semibold border transition-all ${
-                  activeSub === sub ? 'bg-accent text-white border-accent' : 'border-gray-200 text-gray-600 hover:border-accent'
+                  activeSub === sub ? 'bg-accent text-white border-accent' : 'border-white/15 text-neutral-300 hover:border-accent'
                 }`}
               >
                 {sub}
@@ -163,17 +163,17 @@ export default function CatalogPage() {
 
         {/* ── Controles: conteo + sort + limpiar ── */}
         <div className="flex flex-wrap items-center justify-between gap-3 mb-5">
-          <p className="text-sm text-gray-500">
+          <p className="text-sm text-neutral-400">
             {loading
-              ? <span className="flex items-center gap-1.5 text-gray-400"><Loader2 size={13} className="animate-spin" /> Cargando…</span>
-              : <><span className="font-bold text-black">{filtered.length}</span> productos</>
+              ? <span className="flex items-center gap-1.5 text-neutral-500"><Loader2 size={13} className="animate-spin" /> Cargando…</span>
+              : <><span className="font-bold text-white">{filtered.length}</span> productos</>
             }
           </p>
           <div className="flex items-center gap-2">
             {hasRefinements && (
               <button
                 onClick={() => clearFilters({ preserveCategory: Boolean(categoriaId) })}
-                className="flex items-center gap-1 text-xs text-gray-500 hover:text-black border border-gray-200 px-3 py-1.5 hover:border-accent transition-colors"
+                className="flex items-center gap-1 text-xs text-neutral-400 hover:text-white border border-white/15 px-3 py-1.5 hover:border-accent transition-colors"
               >
                 <X size={11} /> Limpiar filtros
               </button>
@@ -182,26 +182,26 @@ export default function CatalogPage() {
               <select
                 value={sort}
                 onChange={(e) => setFilter('sort', e.target.value)}
-                className="appearance-none bg-white border border-gray-200 pl-3 pr-8 py-1.5 text-xs font-medium focus:outline-none focus:ring-2 focus:ring-accent cursor-pointer"
+                className="appearance-none bg-superficie border border-white/15 pl-3 pr-8 py-1.5 text-xs font-medium focus:outline-none focus:ring-2 focus:ring-accent cursor-pointer"
               >
                 {SORT_OPTIONS.map((o) => <option key={o.value} value={o.value}>{o.label}</option>)}
               </select>
-              <ChevronDown size={12} className="absolute right-2.5 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none" />
+              <ChevronDown size={12} className="absolute right-2.5 top-1/2 -translate-y-1/2 text-neutral-500 pointer-events-none" />
             </div>
           </div>
         </div>
 
         {/* ── Grid de productos ── */}
         {loading ? (
-          <div className="flex flex-col items-center justify-center gap-3 min-h-[60vh] text-gray-400 text-sm">
+          <div className="flex flex-col items-center justify-center gap-3 min-h-[60vh] text-neutral-500 text-sm">
             <Loader2 size={28} className="animate-spin" />
             Cargando productos…
           </div>
         ) : filtered.length === 0 ? (
           <div className="text-center py-20">
-            <Search size={40} className="text-gray-200 mx-auto mb-4" />
-            <p className="text-base font-bold text-black">Sin resultados</p>
-            <p className="text-sm text-gray-400 mt-1">Intenta con otros filtros</p>
+            <Search size={40} className="text-neutral-700 mx-auto mb-4" />
+            <p className="text-base font-bold text-white">Sin resultados</p>
+            <p className="text-sm text-neutral-500 mt-1">Intenta con otros filtros</p>
             <button
               onClick={() => clearFilters({ preserveCategory: Boolean(categoriaId) })}
               className="btn-primary mt-5 mx-auto"
@@ -216,7 +216,7 @@ export default function CatalogPage() {
             </div>
             {hasMore && (
               <div ref={sentinelRef} className="flex justify-center py-8">
-                <Loader2 size={22} className="animate-spin text-gray-300" />
+                <Loader2 size={22} className="animate-spin text-neutral-600" />
               </div>
             )}
           </>

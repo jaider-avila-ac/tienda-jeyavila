@@ -41,24 +41,24 @@ export default function LegalPage({ slug }) {
 
   return (
     <div className="max-w-3xl mx-auto px-6 py-8 pb-16">
-      <nav className="flex items-center gap-1.5 text-xs text-gray-400 mb-6 flex-wrap">
-        <Link to="/" className="hover:text-black transition-colors">Inicio</Link>
+      <nav className="flex items-center gap-1.5 text-xs text-neutral-500 mb-6 flex-wrap">
+        <Link to="/" className="hover:text-white transition-colors">Inicio</Link>
         <ChevronRight size={11} />
-        <span className="text-gray-600">{doc.titulo}</span>
+        <span className="text-neutral-300">{doc.titulo}</span>
       </nav>
 
-      <h1 className="text-2xl sm:text-3xl font-black text-black">{doc.titulo}</h1>
-      <p className="text-xs text-gray-400 mt-1">Última actualización: {NEGOCIO.actualizado}</p>
+      <h1 className="text-2xl sm:text-3xl font-black text-white">{doc.titulo}</h1>
+      <p className="text-xs text-neutral-500 mt-1">Última actualización: {NEGOCIO.actualizado}</p>
 
       <div className="mt-8 space-y-7">
         {doc.secciones.map((s) => (
           <section key={s.titulo}>
-            <h2 className="text-base font-bold text-black mb-2">{s.titulo}</h2>
+            <h2 className="text-base font-bold text-white mb-2">{s.titulo}</h2>
             {s.parrafos?.map((p) => (
-              <p key={p} className="text-sm text-gray-600 leading-relaxed mb-2">{p}</p>
+              <p key={p} className="text-sm text-neutral-300 leading-relaxed mb-2">{p}</p>
             ))}
             {s.items && (
-              <ul className="list-disc pl-5 space-y-1.5 text-sm text-gray-600 leading-relaxed">
+              <ul className="list-disc pl-5 space-y-1.5 text-sm text-neutral-300 leading-relaxed">
                 {s.items.map((i) => <li key={i}>{i}</li>)}
               </ul>
             )}
@@ -66,11 +66,11 @@ export default function LegalPage({ slug }) {
         ))}
       </div>
 
-      <div className="mt-12 pt-6 border-t border-gray-100">
-        <p className="text-xs font-bold text-gray-500 uppercase tracking-wider mb-3">Otras políticas</p>
+      <div className="mt-12 pt-6 border-t border-white/10">
+        <p className="text-xs font-bold text-neutral-400 uppercase tracking-wider mb-3">Otras políticas</p>
         <div className="flex flex-wrap gap-x-5 gap-y-2">
           {OTROS.filter((o) => o.slug !== slug).map((o) => (
-            <Link key={o.slug} to={`/${o.slug}`} className="text-sm text-gray-600 hover:text-accent transition-colors">
+            <Link key={o.slug} to={`/${o.slug}`} className="text-sm text-neutral-300 hover:text-accent transition-colors">
               {o.label}
             </Link>
           ))}

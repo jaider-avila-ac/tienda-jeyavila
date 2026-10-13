@@ -1,10 +1,21 @@
 import { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, NavLink, useNavigate } from 'react-router-dom'
 import { Search, ShoppingCart, Bell, CircleUserRound, Menu as MenuIcon } from 'lucide-react'
 import { useCart } from '../../context/CartContext'
 import { useAuth } from '../../context/AuthContext'
 import { useNotifications } from '../../context/NotificationsContext'
 import CategoryDrawer from './CategoryDrawer'
+import { NEGOCIO, REDES_JEY } from '../../data/negocio'
+
+// Menú de escritorio, como en el sitio de Jey: enlaces en mayúsculas con un bloque rojo inclinado
+// que marca la página actual. Música lleva a su perfil de Spotify; Contacto, a su WhatsApp.
+const MENU = [
+  { to: '/', label: 'Inicio', end: true },
+  { to: '/catalogo', label: 'Productos' },
+  { href: REDES_JEY.spotify, label: 'Música' },
+  { href: NEGOCIO.whatsappUrl, label: 'Contacto' },
+]
+const claseMenu = 'relative px-3 py-2 text-[11px] font-semibold uppercase tracking-[0.18em] transition-colors'
 
 // ══════════════════════════════════════════════════════════════════════════
 // Versión alterna del header: misma data/funciones que la original (mismo
@@ -35,10 +46,11 @@ export default function Navbar() {
     <>
       <div className="fixed top-0 left-0 right-0 z-50">
 
-        {/* Fila principal — hamburguesa | logo centrado | iconos */}
+        {/* Fila principal — categorías y menú | logo centrado | iconos */}
         <div className="h-16 bg-black border-b border-white/10">
-          <div className="h-full max-w-7xl mx-auto px-4 lg:px-6 grid grid-cols-[auto_1fr_auto] items-center gap-2">
+          <div className="h-full max-w-7xl mx-auto px-4 lg:px-6 grid grid-cols-[1fr_auto_1fr] items-center gap-2">
 
+            <div className="flex items-center gap-2">
             <button
               onClick={() => setDrawerOpen((v) => !v)}
               className={`w-10 h-10 flex items-center justify-center transition-colors flex-shrink-0 ${
@@ -48,6 +60,22 @@ export default function Navbar() {
             >
               <MenuIcon size={19} />
             </button>
+            <nav className="hidden lg:flex items-center">
+              {MENU.map((m) => m.to ? (
+                <NavLink key={m.label} to={m.to} end={m.end}
+                  className={({ isActive }) => `${claseMenu} ${isActive ? 'text-white' : 'text-neutral-400 hover:text-white'}`}>
+                  {({ isActive }) => (
+                    <>
+                      <span className={`absolute inset-0 -skew-x-12 bg-accent transition-transform duration-300 origin-bottom ${isActive ? 'scale-y-100' : 'scale-y-0'}`} />
+                      <span className="relative">{m.label}</span>
+                    </>
+                  )}
+                </NavLink>
+              ) : (
+                <a key={m.label} href={m.href} target="_blank" rel="noopener noreferrer" className={`${claseMenu} text-neutral-400 hover:text-white`}>{m.label}</a>
+              ))}
+            </nav>
+            </div>
 
             <Link to="/" className="flex items-center justify-center">
               <img src="/logos/logo-blanco.png" alt="Jey Avila Music" width="800" height="334" className="h-10 sm:h-11 w-auto" />
@@ -61,7 +89,7 @@ export default function Navbar() {
               >
                 <Bell size={18} />
                 {unreadCount > 0 && (
-                  <span className="absolute top-1 right-1 min-w-[15px] h-[15px] bg-accent text-white text-[9px] font-black flex items-center justify-center px-0.5 border-2 border-black">
+                  <span className="absolute top-1 right-1 min-w-[15px] h-[15px] bg-accent text-white text-[9px] font-black flex items-center justify-center px-0.5 border-2 border-white">
                     {unreadCount > 9 ? '9+' : unreadCount}
                   </span>
                 )}
@@ -82,7 +110,7 @@ export default function Navbar() {
               >
                 <ShoppingCart size={19} />
                 {count > 0 && (
-                  <span className="absolute top-1 right-1 min-w-[15px] h-[15px] bg-accent text-white text-[9px] font-black flex items-center justify-center px-0.5 border-2 border-black">
+                  <span className="absolute top-1 right-1 min-w-[15px] h-[15px] bg-accent text-white text-[9px] font-black flex items-center justify-center px-0.5 border-2 border-white">
                     {count}
                   </span>
                 )}
@@ -99,7 +127,7 @@ export default function Navbar() {
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="Buscar productos, marcas, categorías..."
-              className="w-full h-9 bg-white border border-white pl-4 pr-11 text-sm text-gray-800 placeholder:text-gray-400 outline-none focus:ring-2 focus:ring-accent transition"
+              className="w-full h-9 bg-superficie border border-white pl-4 pr-11 text-sm text-neutral-100 placeholder:text-neutral-500 outline-none focus:ring-2 focus:ring-accent transition"
             />
             <button
               type="submit"

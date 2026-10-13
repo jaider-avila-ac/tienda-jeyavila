@@ -30,17 +30,17 @@ export default function ResetPasswordPage() {
   }
 
   return (
-    <div className="min-h-screen bg-white flex items-center justify-center px-6">
+    <div className="min-h-screen bg-superficie flex items-center justify-center px-6">
       <div className="w-full max-w-[400px] flex flex-col gap-6">
 
         <div className="flex justify-center">
-          <img src="/logos/logo-negro.png" alt="Jey Avila Music" width="800" height="334" className="h-16 w-auto" />
+          <img src="/logos/logo-blanco.png" alt="Jey Avila Music" width="800" height="334" className="h-16 w-auto" />
         </div>
 
         {done ? (
           <div className="text-center flex flex-col gap-4">
-            <h2 className="text-2xl font-bold text-black">¡Contraseña actualizada!</h2>
-            <p className="text-sm text-gray-500">Ya puedes iniciar sesión con tu nueva contraseña.</p>
+            <h2 className="text-2xl font-bold text-white">¡Contraseña actualizada!</h2>
+            <p className="text-sm text-neutral-400">Ya puedes iniciar sesión con tu nueva contraseña.</p>
             <button
               onClick={() => navigate('/login')}
               className="w-full h-[54px] bg-accent text-white text-base font-bold hover:bg-accent-dark transition-colors"
@@ -51,28 +51,28 @@ export default function ResetPasswordPage() {
         ) : (
           <>
             <div className="text-center">
-              <h2 className="text-2xl font-bold text-black mb-2">Nueva contraseña</h2>
-              <p className="text-sm text-gray-500">Ingresa el código que recibiste y tu nueva contraseña.</p>
+              <h2 className="text-2xl font-bold text-white mb-2">Nueva contraseña</h2>
+              <p className="text-sm text-neutral-400">Ingresa el código que recibiste y tu nueva contraseña.</p>
             </div>
 
             {error && (
-              <div className="p-3 bg-red-50 border border-red-200 text-sm text-red-700 text-center">{error}</div>
+              <div className="p-3 bg-accent/10 border border-accent/40 text-sm text-red-400 text-center">{error}</div>
             )}
 
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
-                <label className="block text-xs font-bold text-gray-500 uppercase tracking-wide mb-1.5">
+                <label className="block text-xs font-bold text-neutral-400 uppercase tracking-wide mb-1.5">
                   Código de verificación
                 </label>
                 <input
                   type="text" required value={code} onChange={(e) => setCode(e.target.value)}
                   placeholder="123456"
                   maxLength={6}
-                  className="w-full px-4 py-3 border border-gray-200 text-sm focus:outline-none focus:border-accent transition-colors"
+                  className="w-full px-4 py-3 border border-white/15 text-sm focus:outline-none focus:border-accent transition-colors"
                 />
               </div>
               <div>
-                <label className="block text-xs font-bold text-gray-500 uppercase tracking-wide mb-1.5">
+                <label className="block text-xs font-bold text-neutral-400 uppercase tracking-wide mb-1.5">
                   Nueva contraseña
                 </label>
                 <div className="relative">
@@ -81,11 +81,11 @@ export default function ResetPasswordPage() {
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder="Mínimo 6 caracteres"
                     minLength={6}
-                    className="w-full px-4 py-3 pr-12 border border-gray-200 text-sm focus:outline-none focus:border-accent transition-colors"
+                    className="w-full px-4 py-3 pr-12 border border-white/15 text-sm focus:outline-none focus:border-accent transition-colors"
                   />
                   <button
                     type="button" onClick={() => setShowPass((v) => !v)}
-                    className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-black"
+                    className="absolute right-4 top-1/2 -translate-y-1/2 text-neutral-500 hover:text-white"
                   >
                     {showPass ? <EyeOff size={16} /> : <Eye size={16} />}
                   </button>
@@ -101,7 +101,7 @@ export default function ResetPasswordPage() {
 
             <button
               onClick={() => navigate('/login')}
-              className="text-xs text-gray-400 hover:text-black transition-colors text-center"
+              className="text-xs text-neutral-500 hover:text-white transition-colors text-center"
             >
               ← Volver al login
             </button>

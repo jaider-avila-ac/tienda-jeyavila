@@ -6,18 +6,17 @@ import { useWishlist } from '../../context/WishlistContext'
 import { useInViewOnce } from '../../hooks/useInViewOnce'
 
 // ══════════════════════════════════════════════════════════════════════════
-// Versión alterna de la tarjeta de producto: mismos datos/props y misma
-// lógica (favoritos, stock, oferta, rating), pero con otra forma — el badge
-// de descuento/nuevo se unifica en uno solo, el botón de favorito lleva
-// borde propio, y el texto queda centrado debajo de la imagen en vez de
-// alineado a la izquierda como antes.
+// Tarjeta de producto de la tienda de Jey Avila: la foto sobre fondo blanco (así se ven las
+// fotos de producto, que vienen con fondo blanco) y la información en un bloque oscuro, con el
+// nombre en mayúsculas, el precio grande y un botón rojo a lo ancho. El botón lleva a la página
+// del producto, donde se elige talla/color antes de agregar al carrito.
 // ══════════════════════════════════════════════════════════════════════════
 export default function ProductCard({ product }) {
   const { id, slug, nombre, marca, imagenes, precio, precioFinal, descuento, etiquetas, tallas, ratingPromedio, totalResenas } = product
   const finalPrice = precioFinal ?? precio
-  // URL "bonita" con el slug (ej. /producto/camiseta-negra-jey-avila) en vez del id numérico —
-  // el backend acepta ambos (ver PublicCatalogService.getProductoByIdOrSlug), así que un
-  // producto sin slug todavía (no debería pasar, es NOT NULL) simplemente cae al id.
+  // URL "bonita" con el slug (ej. /producto/gorra-jey-avila) en vez del id numérico — el backend
+  // acepta ambos (ver PublicCatalogService.getProductoByIdOrSlug), así que un producto sin slug
+  // todavía (no debería pasar, es NOT NULL) simplemente cae al id.
   const href = `/producto/${slug || id}`
   const isNew = etiquetas?.includes('nuevo')
   const hasStock = tallas?.some((t) => t.stock > 0) ?? true
@@ -43,76 +42,70 @@ export default function ProductCard({ product }) {
     <Link
       ref={inViewRef}
       to={href}
-      className={`group block bg-white border border-gray-100 overflow-hidden hover:shadow-lg hover:-translate-y-0.5 transition-[box-shadow,opacity,transform] duration-500 ease-out ${
+      className={`group flex flex-col h-full bg-superficie border border-white/10 overflow-hidden hover:border-accent transition-[border-color,opacity,transform] duration-500 ease-out ${
         inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
       }`}
     >
-      {/* Imagen */}
-      <div className="relative aspect-square bg-gray-50 overflow-hidden">
+      {/* Imagen, sobre blanco */}
+      <div className="relative aspect-square bg-white overflow-hidden">
         <img
-          src={imagenes?.[0]?.url ?? imagenes?.[0] ?? 'https://placehold.co/300x300/f5f5f5/999?text=Jey+Avila+Music'}
+          src={imagenes?.[0]?.url ?? imagenes?.[0] ?? 'https://placehold.co/300x300/ffffff/0b0b0b?text=Jey+Avila+Music'}
           alt={nombre}
-          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+          className={`w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ${hasStock ? '' : 'opacity-60'}`}
           loading="lazy"
         />
 
         {(descuento > 0 || isNew) && (
-          <span className={`absolute top-2.5 left-2.5 text-white text-[10px] font-bold px-2 py-1 ${
-            descuento > 0 ? 'bg-red-600' : 'bg-accent'
-          }`}>
-            {descuento > 0 ? `-${descuento}%` : 'Nuevo'}
+          <span className="absolute top-2.5 left-2.5 bg-accent text-white text-[10px] font-bold uppercase tracking-wider px-2 py-1">
+            {descuento > 0 ? `Promoción -${descuento}%` : 'Nuevo'}
           </span>
         )}
 
         <button
           onClick={handleFavorito}
           aria-label={favorito ? 'Quitar de favoritos' : 'Agregar a favoritos'}
-          className="absolute top-2.5 right-2.5 w-8 h-8 bg-white border border-gray-100 flex items-center justify-center shadow-sm hover:scale-110 transition-transform"
+          className="absolute top-2.5 right-2.5 w-8 h-8 bg-black/80 flex items-center justify-center hover:bg-accent transition-colors"
         >
-          <Heart size={13} className={favorito ? 'text-accent fill-accent' : 'text-gray-400'} />
+          <Heart size={13} className={favorito ? 'text-white fill-white' : 'text-white'} />
         </button>
 
         {!hasStock && (
-          <div className="absolute inset-0 bg-white/70 flex items-center justify-center">
-            <span className="text-xs font-bold text-gray-500 bg-white px-3 py-1 border border-gray-200">
-              Agotado
-            </span>
-          </div>
+          <span className="absolute bottom-0 inset-x-0 bg-black/85 text-white text-[10px] font-bold uppercase tracking-[0.2em] text-center py-1.5">
+            Agotado
+          </span>
         )}
       </div>
 
-      {/* Info */}
-      <div className="p-3.5 text-center sm:text-left">
-        <p className="text-[10px] text-gray-400 font-semibold uppercase tracking-wide truncate min-h-[14px]">{marca}</p>
-
-        <h3 className="text-xs font-medium text-gray-800 mt-0.5 line-clamp-2 leading-snug min-h-[33px] group-hover:text-black transition-colors">
+      {/* Información, en oscuro */}
+      <div className="flex flex-1 flex-col p-3.5 sm:p-4">
+        <h3 className="font-display text-xs sm:text-sm font-bold uppercase leading-snug text-white line-clamp-2">
           {nombre}
         </h3>
+        <p className="mt-1 text-[11px] text-neutral-400 truncate min-h-[16px]">{marca}</p>
 
-        <div className="flex items-center justify-center sm:justify-start gap-1 mt-1.5 min-h-[11px]">
-          {tieneResenas && (
-            <>
-              {[1, 2, 3, 4, 5].map((n) => (
-                <Star
-                  key={n}
-                  size={9}
-                  className={n <= Math.round(ratingPromedio) ? 'text-amber-400 fill-amber-400' : 'text-gray-200 fill-gray-200'}
-                />
-              ))}
-              <span className="text-[10px] text-gray-400 ml-0.5">({totalResenas})</span>
-            </>
-          )}
-        </div>
+        {tieneResenas && (
+          <div className="flex items-center gap-1 mt-1.5">
+            {[1, 2, 3, 4, 5].map((n) => (
+              <Star
+                key={n}
+                size={9}
+                className={n <= Math.round(ratingPromedio) ? 'text-amber-400 fill-amber-400' : 'text-neutral-700 fill-neutral-700'}
+              />
+            ))}
+            <span className="text-[10px] text-neutral-500 ml-0.5">({totalResenas})</span>
+          </div>
+        )}
 
-        <div className="mt-2 min-h-[34px] flex flex-col justify-center">
-          {descuento > 0 ? (
-            <div className="flex items-baseline justify-center sm:justify-start gap-1.5 flex-wrap">
-              <p className="text-sm font-black text-accent">{fmt(finalPrice)}</p>
-              <p className="text-[10px] text-gray-400 line-through">{fmt(precio)}</p>
-            </div>
-          ) : (
-            <p className="text-sm font-black text-black">{fmt(finalPrice)}</p>
-          )}
+        <div className="mt-auto pt-3">
+          {descuento > 0 && <p className="text-[11px] text-neutral-500 line-through">{fmt(precio)}</p>}
+          <p className="text-base sm:text-lg font-black text-white leading-none">
+            {fmt(finalPrice)} <span className="text-[10px] font-semibold text-neutral-400">COP</span>
+          </p>
+          <span className={`mt-3 block py-2.5 text-center text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.15em] transition-colors ${
+            hasStock ? 'bg-accent text-white group-hover:bg-accent-dark' : 'bg-white/10 text-neutral-400'
+          }`}>
+            {hasStock ? 'Comprar' : 'Agotado'}
+          </span>
         </div>
       </div>
     </Link>

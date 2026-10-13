@@ -25,18 +25,18 @@ export default function StatusStepper({ estado }) {
               <div className={`w-7 h-7 flex items-center justify-center flex-shrink-0 transition-colors ${
                 done ? 'bg-accent text-white' :
                 active ? 'bg-accent text-white ring-2 ring-accent ring-offset-2' :
-                          'bg-gray-100 text-gray-300'
+                          'bg-superficie-2 text-neutral-600'
               }`}>
                 <Icon size={13} />
               </div>
               <span className={`text-[10px] font-medium whitespace-nowrap ${
-                done || active ? 'text-black' : 'text-gray-400'
+                done || active ? 'text-white' : 'text-neutral-500'
               }`}>
                 {label}
               </span>
             </div>
             {i < ESTADOS.length - 1 && (
-              <div className={`h-px w-8 sm:w-12 mb-4 flex-shrink-0 ${done ? 'bg-accent' : 'bg-gray-200'}`} />
+              <div className={`h-px w-8 sm:w-12 mb-4 flex-shrink-0 ${done ? 'bg-accent' : 'bg-white/15'}`} />
             )}
           </div>
         )

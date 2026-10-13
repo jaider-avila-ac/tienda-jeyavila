@@ -82,28 +82,28 @@ export default function VerifyPage() {
   }
 
   return (
-    <div className="min-h-screen bg-white flex items-center justify-center px-6">
+    <div className="min-h-screen bg-superficie flex items-center justify-center px-6">
       <div className="w-full max-w-[400px] flex flex-col gap-6 text-center">
 
         <div className="flex justify-center">
-          <img src="/logos/logo-negro.png" alt="Jey Avila Music" width="800" height="334" className="h-16 w-auto" />
+          <img src="/logos/logo-blanco.png" alt="Jey Avila Music" width="800" height="334" className="h-16 w-auto" />
         </div>
 
         <div>
-          <h2 className="text-2xl font-bold text-black mb-2">Verifica tu correo</h2>
-          <p className="text-sm text-gray-500">
+          <h2 className="text-2xl font-bold text-white mb-2">Verifica tu correo</h2>
+          <p className="text-sm text-neutral-400">
             Ingresa el código de 6 dígitos enviado a<br />
-            <span className="font-semibold text-black">{email || 'tu correo'}</span>
+            <span className="font-semibold text-white">{email || 'tu correo'}</span>
           </p>
         </div>
 
         {error && (
-          <div className="p-3 bg-red-50 border border-red-200 text-sm text-red-700">
+          <div className="p-3 bg-accent/10 border border-accent/40 text-sm text-red-400">
             {error}
           </div>
         )}
         {resendMsg && (
-          <div className="p-3 bg-green-50 border border-green-200 text-sm text-green-700">
+          <div className="p-3 bg-green-500/10 border border-green-500/30 text-sm text-green-400">
             {resendMsg}
           </div>
         )}
@@ -118,7 +118,7 @@ export default function VerifyPage() {
                 value={d}
                 onChange={(e) => handleChange(i, e.target.value)}
                 onKeyDown={(e) => handleKeyDown(i, e)}
-                className="w-12 h-14 text-center text-2xl font-black border-2 border-gray-200 focus:outline-none focus:border-accent transition-colors"
+                className="w-12 h-14 text-center text-2xl font-black border-2 border-white/15 focus:outline-none focus:border-accent transition-colors"
               />
             ))}
           </div>
@@ -133,7 +133,7 @@ export default function VerifyPage() {
 
         <button
           onClick={handleResend} disabled={resending}
-          className="text-sm text-gray-500 hover:text-black transition-colors disabled:opacity-60 flex items-center justify-center gap-2"
+          className="text-sm text-neutral-400 hover:text-white transition-colors disabled:opacity-60 flex items-center justify-center gap-2"
         >
           {resending && <Loader2 size={13} className="animate-spin" />}
           ¿No recibiste el código? Reenviar
@@ -141,7 +141,7 @@ export default function VerifyPage() {
 
         <button
           onClick={() => navigate('/registro')}
-          className="text-xs text-gray-400 hover:text-black transition-colors"
+          className="text-xs text-neutral-500 hover:text-white transition-colors"
         >
           ← Volver al registro
         </button>

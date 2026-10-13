@@ -63,26 +63,26 @@ export default function ShareMenu({ titulo, url }) {
       <button
         type="button"
         onClick={() => setAbierto((v) => !v)}
-        className="w-full flex items-center justify-center gap-2 border-2 border-gray-200 px-5 py-3 text-sm font-bold text-gray-700 hover:border-accent hover:text-black transition-all"
+        className="w-full flex items-center justify-center gap-2 border-2 border-white/15 px-5 py-3 text-sm font-bold text-neutral-200 hover:border-accent hover:text-white transition-all"
       >
         <Share2 size={16} />
         Compartir
       </button>
 
       {abierto && (
-        <div className="absolute z-20 bottom-full mb-2 left-0 right-0 bg-white border-2 border-gray-200 shadow-lg">
+        <div className="absolute z-20 bottom-full mb-2 left-0 right-0 bg-superficie border-2 border-white/15 shadow-lg">
           <button type="button" onClick={compartirWhatsapp}
-            className="w-full flex items-center gap-2.5 px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 border-b border-gray-100">
+            className="w-full flex items-center gap-2.5 px-4 py-3 text-sm text-neutral-200 hover:bg-superficie-2 border-b border-white/10">
             <WhatsAppIcon className="w-4 h-4 text-green-500" />
             Compartir por WhatsApp
           </button>
           <button type="button" onClick={compartirInstagram}
-            className="w-full flex items-center gap-2.5 px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 border-b border-gray-100">
+            className="w-full flex items-center gap-2.5 px-4 py-3 text-sm text-neutral-200 hover:bg-superficie-2 border-b border-white/10">
             <Instagram size={16} className="text-pink-500" />
             Compartir por Instagram
           </button>
           <button type="button" onClick={copiarEnlace}
-            className="w-full flex items-center gap-2.5 px-4 py-3 text-sm text-gray-700 hover:bg-gray-50">
+            className="w-full flex items-center gap-2.5 px-4 py-3 text-sm text-neutral-200 hover:bg-superficie-2">
             <LinkIcon size={16} />
             Copiar enlace
           </button>

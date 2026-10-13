@@ -196,7 +196,7 @@ export default function RegisterPage() {
   }, [handleGoogleCredential, handleGoogleClick, inAppBrowser])
 
   return (
-    <div className="flex w-full h-screen overflow-hidden bg-white">
+    <div className="flex w-full h-screen overflow-hidden bg-superficie">
       {/* Panel lateral: foto de Jey en tarima, ver LoginPage.jsx */}
       <div className="flex-1 hidden md:flex relative items-center justify-center overflow-hidden bg-black">
         <img src="/img/tarima-sonriendo.webp" alt="" className="absolute inset-0 w-full h-full object-cover object-top" onError={(e) => { e.currentTarget.src = '/img/tarima-sonriendo.jpg' }} />
@@ -205,18 +205,18 @@ export default function RegisterPage() {
       </div>
 
       {/* Formulario */}
-      <div className="w-full md:w-[470px] bg-white flex items-center justify-center overflow-y-auto px-10 py-12 border-l border-gray-100">
+      <div className="w-full md:w-[470px] bg-superficie flex items-center justify-center overflow-y-auto px-10 py-12 border-l border-white/10">
         <div className="w-full max-w-[380px] flex flex-col gap-5">
 
           {/* Logo */}
           <div className="flex justify-center mb-2">
-            <img src="/logos/logo-negro.png" alt="Jey Avila Music" width="800" height="334" className="h-16 w-auto" />
+            <img src="/logos/logo-blanco.png" alt="Jey Avila Music" width="800" height="334" className="h-16 w-auto" />
           </div>
 
-          <h2 className="text-center text-2xl font-bold text-black">Crear cuenta</h2>
+          <h2 className="text-center text-2xl font-bold text-white">Crear cuenta</h2>
 
           {error && (
-            <div className="p-3 bg-red-50 border border-red-200 text-sm text-red-700 text-center">
+            <div className="p-3 bg-accent/10 border border-accent/40 text-sm text-red-400 text-center">
               {error}
             </div>
           )}
@@ -226,78 +226,78 @@ export default function RegisterPage() {
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="grid grid-cols-2 gap-3">
               <div>
-                <label className="block text-xs font-bold text-gray-500 uppercase tracking-wide mb-1.5">Nombre</label>
+                <label className="block text-xs font-bold text-neutral-400 uppercase tracking-wide mb-1.5">Nombre</label>
                 <input
                   type="text" required value={nombre} onChange={(e) => setNombre(e.target.value)}
                   placeholder="Juan"
-                  className="w-full px-4 py-3 border border-gray-200 text-sm focus:outline-none focus:border-accent transition-colors"
+                  className="w-full px-4 py-3 border border-white/15 text-sm focus:outline-none focus:border-accent transition-colors"
                 />
               </div>
               <div>
-                <label className="block text-xs font-bold text-gray-500 uppercase tracking-wide mb-1.5">Apellido</label>
+                <label className="block text-xs font-bold text-neutral-400 uppercase tracking-wide mb-1.5">Apellido</label>
                 <input
                   type="text" value={apellido} onChange={(e) => setApellido(e.target.value)}
                   placeholder="Pérez"
-                  className="w-full px-4 py-3 border border-gray-200 text-sm focus:outline-none focus:border-accent transition-colors"
+                  className="w-full px-4 py-3 border border-white/15 text-sm focus:outline-none focus:border-accent transition-colors"
                 />
               </div>
             </div>
             <div>
-              <label className="block text-xs font-bold text-gray-500 uppercase tracking-wide mb-1.5">
-                Número de cédula <span className="normal-case font-normal text-gray-400">(opcional)</span>
+              <label className="block text-xs font-bold text-neutral-400 uppercase tracking-wide mb-1.5">
+                Número de cédula <span className="normal-case font-normal text-neutral-500">(opcional)</span>
               </label>
               <input
                 type="text" value={numeroDocumento} onChange={(e) => setNumeroDocumento(e.target.value)}
                 placeholder="Si compraste antes en tienda física, úsala para ver tu historial"
-                className="w-full px-4 py-3 border border-gray-200 text-sm focus:outline-none focus:border-accent transition-colors"
+                className="w-full px-4 py-3 border border-white/15 text-sm focus:outline-none focus:border-accent transition-colors"
               />
             </div>
             <div>
-              <label className="block text-xs font-bold text-gray-500 uppercase tracking-wide mb-1.5">Correo electrónico</label>
+              <label className="block text-xs font-bold text-neutral-400 uppercase tracking-wide mb-1.5">Correo electrónico</label>
               <input
                 type="email" required value={email} onChange={(e) => setEmail(e.target.value)}
                 placeholder="tu@correo.com"
-                className="w-full px-4 py-3 border border-gray-200 text-sm focus:outline-none focus:border-accent transition-colors"
+                className="w-full px-4 py-3 border border-white/15 text-sm focus:outline-none focus:border-accent transition-colors"
               />
             </div>
             <div>
-              <label className="block text-xs font-bold text-gray-500 uppercase tracking-wide mb-1.5">Contraseña</label>
+              <label className="block text-xs font-bold text-neutral-400 uppercase tracking-wide mb-1.5">Contraseña</label>
               <div className="relative">
                 <input
                   type={showPass ? 'text' : 'password'} required value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="Mínimo 6 caracteres"
                   minLength={6}
-                  className="w-full px-4 py-3 pr-12 border border-gray-200 text-sm focus:outline-none focus:border-accent transition-colors"
+                  className="w-full px-4 py-3 pr-12 border border-white/15 text-sm focus:outline-none focus:border-accent transition-colors"
                 />
                 <button
                   type="button" onClick={() => setShowPass((v) => !v)}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-black"
+                  className="absolute right-4 top-1/2 -translate-y-1/2 text-neutral-500 hover:text-white"
                 >
                   {showPass ? <EyeOff size={16} /> : <Eye size={16} />}
                 </button>
               </div>
             </div>
             <div>
-              <label className="block text-xs font-bold text-gray-500 uppercase tracking-wide mb-1.5">Repetir contrasena</label>
+              <label className="block text-xs font-bold text-neutral-400 uppercase tracking-wide mb-1.5">Repetir contrasena</label>
               <div className="relative">
                 <input
                   type={showPass ? 'text' : 'password'} required value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
                   placeholder="Escribe la contrasena otra vez"
                   minLength={6}
-                  className="w-full px-4 py-3 pr-12 border border-gray-200 text-sm focus:outline-none focus:border-accent transition-colors"
+                  className="w-full px-4 py-3 pr-12 border border-white/15 text-sm focus:outline-none focus:border-accent transition-colors"
                 />
                 <button
                   type="button" onClick={() => setShowPass((v) => !v)}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-black"
+                  className="absolute right-4 top-1/2 -translate-y-1/2 text-neutral-500 hover:text-white"
                 >
                   {showPass ? <EyeOff size={16} /> : <Eye size={16} />}
                 </button>
               </div>
             </div>
             <div className="space-y-2.5 pt-1">
-              <label className="flex items-start gap-2.5 text-xs text-gray-500 leading-relaxed cursor-pointer">
+              <label className="flex items-start gap-2.5 text-xs text-neutral-400 leading-relaxed cursor-pointer">
                 <input
                   type="checkbox"
                   required
@@ -307,12 +307,12 @@ export default function RegisterPage() {
                 />
                 <span>
                   He leído y acepto los{' '}
-                  <a href="/terminos" target="_blank" rel="noopener noreferrer" className="font-bold text-black hover:underline">Términos de uso</a>
+                  <a href="/terminos" target="_blank" rel="noopener noreferrer" className="font-bold text-white hover:underline">Términos de uso</a>
                   {' '}y la{' '}
-                  <a href="/privacidad" target="_blank" rel="noopener noreferrer" className="font-bold text-black hover:underline">Política de privacidad</a>.
+                  <a href="/privacidad" target="_blank" rel="noopener noreferrer" className="font-bold text-white hover:underline">Política de privacidad</a>.
                 </span>
               </label>
-              <label className="flex items-start gap-2.5 text-xs text-gray-500 leading-relaxed cursor-pointer">
+              <label className="flex items-start gap-2.5 text-xs text-neutral-400 leading-relaxed cursor-pointer">
                 <input
                   type="checkbox"
                   checked={aceptaPromo}
@@ -332,13 +332,13 @@ export default function RegisterPage() {
           </form>
 
           <div className="flex items-center gap-3">
-            <div className="flex-1 h-px bg-gray-200" />
-            <span className="text-xs text-gray-400">o</span>
-            <div className="flex-1 h-px bg-gray-200" />
+            <div className="flex-1 h-px bg-white/15" />
+            <span className="text-xs text-neutral-500">o</span>
+            <div className="flex-1 h-px bg-white/15" />
           </div>
 
           {inAppBrowser ? (
-            <p className="p-3 bg-amber-50 border border-amber-200 text-xs text-amber-800 text-center leading-relaxed">
+            <p className="p-3 bg-amber-500/10 border border-amber-500/30 text-xs text-amber-300 text-center leading-relaxed">
               Google no permite registrarse desde el navegador integrado de esta app.
               Toca el menú (⋯) y elige <strong>"Abrir en Chrome"</strong> o <strong>"Abrir en el navegador"</strong>,
               o crea tu cuenta con correo arriba.
@@ -347,16 +347,16 @@ export default function RegisterPage() {
             <div className="relative w-full min-h-[54px] flex items-center justify-center [&>div]:!w-full [&_iframe]:!w-full">
               <div ref={googleBtnRef} className="w-full" />
               {googleLoading && (
-                <div className="absolute inset-0 bg-white/90 flex items-center justify-center gap-2 text-sm font-semibold text-black">
+                <div className="absolute inset-0 bg-black/85 flex items-center justify-center gap-2 text-sm font-semibold text-white">
                   <Loader2 size={18} className="animate-spin" /> Continuando…
                 </div>
               )}
             </div>
           )}
 
-          <p className="text-center text-sm text-gray-500">
+          <p className="text-center text-sm text-neutral-400">
             ¿Ya tienes cuenta?{' '}
-            <Link to="/login" className="font-bold text-black hover:underline">Iniciar sesión</Link>
+            <Link to="/login" className="font-bold text-white hover:underline">Iniciar sesión</Link>
           </p>
         </div>
       </div>

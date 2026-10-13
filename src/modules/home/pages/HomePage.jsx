@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef, useMemo } from 'react'
 import { Link } from 'react-router-dom'
-import { ArrowRight, Truck, RefreshCw, Shield, Flame, Clock, ChevronLeft, ChevronRight, Loader2 } from 'lucide-react'
+import { ArrowRight, Flame, Clock, ChevronLeft, ChevronRight, Loader2 } from 'lucide-react'
 import ProductCard from '../../../components/ui/ProductCard'
 import { getProducts, subscribeProducts } from '../../../services/productService'
 import { getActiveCategories } from '../../../services/categoryService'
@@ -10,55 +10,25 @@ import { tokenStore } from '../../../services/tokenStore'
 import { getBanners, getBannersGuardados } from '../../../services/bannerService'
 import { useBackendOnline } from '../../../hooks/useBackendOnline'
 import CollectionsGrid from '../components/CollectionsGrid'
+import HeroJey from '../components/HeroJey'
+import LlamadoJey from '../components/LlamadoJey'
 import { applyPageSeo } from '../../../utils/seo'
-import { NEGOCIO } from '../../../data/negocio'
 
-/** Tira de "Explora nuestro catálogo": solo se duplica y anima cuando UN solo set de productos
- *  ya desborda el ancho visible del contenedor — en ese caso, las dos copias de un mismo
- *  producto siempre quedan separadas por más de un ancho de pantalla, así que nunca se puede
- *  ver el mismo producto dos veces al mismo tiempo, sin importar en qué punto vaya el scroll.
- *  Con pocos productos (un solo set ya cabe completo en pantalla) no se duplica nada — se
- *  muestra una sola vez, estática, sin animación. */
-function ProductMarquee({ products }) {
-  const containerRef = useRef(null)
-  const measureRef = useRef(null)
-  const [shouldLoop, setShouldLoop] = useState(false)
-
-  useEffect(() => {
-    const container = containerRef.current
-    const measure = measureRef.current
-    if (!container || !measure) return
-
-    // measureRef siempre contiene UN solo set (nunca duplicado, invisible, fuera del flujo) —
-    // si ya desborda el contenedor visible, hay contenido de sobra para que el loop se vea
-    // continuo; si no, se muestra tal cual, sin animación.
-    const check = () => setShouldLoop(measure.scrollWidth > container.clientWidth)
-    check()
-
-    const ro = new ResizeObserver(check)
-    ro.observe(container)
-    ro.observe(measure)
-    return () => ro.disconnect()
-  }, [products])
-
-  const visibles = shouldLoop ? [...products, ...products] : products
-
+/** Encabezado de cada sección de la portada: título en mayúsculas (tipografía del sitio de Jey)
+ *  con una barra roja, y el enlace "Ver todos" a la derecha. */
+function TituloSeccion({ children, icono, to, verTodo = 'Ver todos' }) {
   return (
-    <div ref={containerRef} className="overflow-hidden relative">
-      <div ref={measureRef} className="invisible absolute left-0 top-0 flex gap-3 w-max px-4 pointer-events-none" aria-hidden>
-        {products.map((p) => (
-          <div key={p.id} className="w-36 sm:w-48 flex-shrink-0">
-            <ProductCard product={p} />
-          </div>
-        ))}
-      </div>
-      <div className={`flex gap-3 w-max px-4 ${shouldLoop ? 'marquee-track' : ''}`}>
-        {visibles.map((p, i) => (
-          <div key={`${p.id}-${i}`} className="w-36 sm:w-48 flex-shrink-0">
-            <ProductCard product={p} />
-          </div>
-        ))}
-      </div>
+    <div className="flex items-end justify-between gap-4 mb-5">
+      <h2 className="flex items-center gap-3 font-display text-sm sm:text-base font-black uppercase tracking-wide text-white">
+        <span className="w-1 h-5 bg-accent" aria-hidden="true" />
+        {icono}
+        {children}
+      </h2>
+      {to && (
+        <Link to={to} className="flex-shrink-0 text-[11px] font-semibold uppercase tracking-[0.15em] text-neutral-400 hover:text-white transition-colors flex items-center gap-1">
+          {verTodo} <ArrowRight size={12} />
+        </Link>
+      )}
     </div>
   )
 }
@@ -243,9 +213,9 @@ export default function HomePage() {
   const activeProducts = backendOnline ? products.filter((p) => p.activo) : []
   const vendidos = activeProducts.filter((p) => p.etiquetas.includes('mas-vendido')).slice(0, 4)
   const nuevos = activeProducts.filter((p) => p.etiquetas.includes('nuevo')).slice(0, 4)
-  // Tira con movimiento constante: no depende de ninguna etiqueta, así siempre hay contenido
-  // que mostrar aunque no existan productos marcados "mas-vendido".
-  const destacados = activeProducts.slice(0, 10)
+  // Productos destacados: no dependen de ninguna etiqueta, así siempre hay contenido que mostrar
+  // aunque no existan productos marcados "mas-vendido".
+  const destacados = activeProducts.slice(0, 8)
 
   // Categoría favorita al frente; el resto en su orden original
   const sortedCategories = useMemo(() => {
@@ -259,7 +229,7 @@ export default function HomePage() {
 
   if (heroLoading) {
     return (
-      <div className="flex flex-col items-center justify-center gap-3 min-h-[70vh] text-gray-400 text-sm">
+      <div className="flex flex-col items-center justify-center gap-3 min-h-[70vh] text-neutral-500 text-sm">
         <Loader2 size={28} className="animate-spin" />
       </div>
     )
@@ -276,7 +246,10 @@ export default function HomePage() {
   return (
     <div className="pb-16">
 
-      {/* ── Hero: fijo bajo el navbar ── */}
+      {/* ── Portada de Jey cuando el panel no tiene banners cargados ── */}
+      {!hasHero && <HeroJey />}
+
+      {/* ── Hero de banners: fijo bajo el navbar ── */}
       {hasHero && (
         <div
           ref={heroBoxRef}
@@ -294,42 +267,27 @@ export default function HomePage() {
 
       {!backendOnline && (
         <div className="max-w-7xl mx-auto px-4 pt-10">
-          <p className="text-sm text-gray-500 text-center bg-gray-50 py-4">
+          <p className="text-sm text-neutral-400 text-center bg-superficie-2 py-4">
             No pudimos conectar con el servidor. Verifica tu conexión e intenta de nuevo.
           </p>
         </div>
       )}
 
-      {/* ── Destacados: tira con movimiento constante (no depende de etiquetas) ── */}
+      {/* ── Productos destacados (no dependen de etiquetas) ── */}
       {destacados.length > 0 && (
-        <section className="pt-10">
-          <div className="max-w-7xl mx-auto px-4 flex items-center justify-between mb-4">
-            <h2 className="text-base font-black text-black">
-              Explora nuestro catálogo
-            </h2>
-            <Link to="/catalogo"
-              className="text-xs text-gray-500 hover:text-black transition-colors flex items-center gap-1">
-              Ver todos <ArrowRight size={12} />
-            </Link>
+        <section className="max-w-7xl mx-auto px-4 pt-10">
+          <TituloSeccion to="/catalogo">Productos destacados</TituloSeccion>
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+            {destacados.map((p) => <ProductCard key={p.id} product={p} />)}
           </div>
-          <ProductMarquee products={destacados} />
         </section>
       )}
 
       {/* ── Más vendidos ── */}
       {vendidos.length > 0 && (
         <section className="max-w-7xl mx-auto px-4 pt-10">
-          <div className="flex items-center justify-between mb-4">
-            <h2 className="flex items-center gap-2 text-base font-black text-black">
-              <Flame size={16} className="text-accent" />
-              Más vendidos
-            </h2>
-            <Link to="/catalogo"
-              className="text-xs text-gray-500 hover:text-black transition-colors flex items-center gap-1">
-              Ver todos <ArrowRight size={12} />
-            </Link>
-          </div>
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+          <TituloSeccion to="/catalogo" icono={<Flame size={16} className="text-accent" />}>Más vendidos</TituloSeccion>
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
             {vendidos.map((p) => <ProductCard key={p.id} product={p} />)}
           </div>
         </section>
@@ -341,25 +299,19 @@ export default function HomePage() {
         if (productos.length === 0) return null
         return (
           <section key={cat.id} className="max-w-7xl mx-auto px-4 pt-10">
-            <div className="flex items-center justify-between mb-4">
-              <h2 className="text-base font-black text-black">{cat.nombre}</h2>
-              <Link to={`/catalogo?categoria=${cat.id}`}
-                className="text-xs text-gray-500 hover:text-black transition-colors flex items-center gap-1">
-                Ver todo <ArrowRight size={12} />
-              </Link>
-            </div>
+            <TituloSeccion to={`/catalogo?categoria=${cat.id}`} verTodo="Ver todo">{cat.nombre}</TituloSeccion>
             {cat.subcategorias.length > 0 && (
               <div className="flex gap-1.5 overflow-x-auto no-scrollbar mb-3 pb-0.5">
                 {cat.subcategorias.map((sub) => (
                   <Link key={sub}
                     to={`/catalogo?categoria=${cat.id}&subcategoria=${encodeURIComponent(sub)}`}
-                    className="flex-shrink-0 text-[11px] font-medium text-gray-500 hover:text-black border border-gray-200 hover:border-accent px-2.5 py-1 transition-colors">
+                    className="flex-shrink-0 text-[11px] font-medium text-neutral-400 hover:text-white border border-white/15 hover:border-accent px-2.5 py-1 transition-colors">
                     {sub}
                   </Link>
                 ))}
               </div>
             )}
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
               {productos.map((p) => <ProductCard key={p.id} product={p} />)}
             </div>
           </section>
@@ -372,16 +324,8 @@ export default function HomePage() {
       {/* ── Nuevos ingresos ── */}
       {nuevos.length > 0 && (
         <section className="max-w-7xl mx-auto px-4 pt-10">
-          <div className="flex items-center justify-between mb-4">
-            <h2 className="text-base font-black text-black">
-              Nuevos ingresos
-            </h2>
-            <Link to="/catalogo?etiqueta=nuevo"
-              className="text-xs text-gray-500 hover:text-black transition-colors flex items-center gap-1">
-              Ver todos <ArrowRight size={12} />
-            </Link>
-          </div>
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+          <TituloSeccion to="/catalogo?etiqueta=nuevo">Nuevos ingresos</TituloSeccion>
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
             {nuevos.map((p) => <ProductCard key={p.id} product={p} />)}
           </div>
         </section>
@@ -390,33 +334,15 @@ export default function HomePage() {
       {/* ── Vistos recientemente ── */}
       {recientes.length > 0 && (
         <section className="max-w-7xl mx-auto px-4 pt-10">
-          <div className="flex items-center justify-between mb-4">
-            <h2 className="flex items-center gap-2 text-base font-black text-black">
-              <Clock size={16} className="text-gray-500" />
-              Vistos recientemente
-            </h2>
-          </div>
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+          <TituloSeccion icono={<Clock size={16} className="text-neutral-400" />}>Vistos recientemente</TituloSeccion>
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
             {recientes.slice(0, 4).map((p) => <ProductCard key={p.id} product={p} />)}
           </div>
         </section>
       )}
 
-      {/* ── CTA WhatsApp ── */}
-      <div className="max-w-7xl mx-auto px-4 pt-10">
-        <div className="bg-black p-6 text-center">
-          <h3 className="text-lg font-black text-white">¿Tienes dudas sobre un producto?</h3>
-          <p className="text-sm text-white/70 mt-1 mb-4">Escríbenos por WhatsApp y te ayudamos</p>
-          <a href={`${NEGOCIO.whatsappUrl}?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20los%20productos%20de%20la%20tienda`}
-            target="_blank" rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 bg-accent text-white px-5 py-2.5 font-bold text-sm hover:bg-accent-dark transition-colors">
-            <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
-            </svg>
-            Chatear ahora
-          </a>
-        </div>
-      </div>
+      {/* ── Cierre: "Más que música, es un llamado" + WhatsApp ── */}
+      <LlamadoJey />
 
       {hasHero && <div ref={contentEndRef} />}
       </div>

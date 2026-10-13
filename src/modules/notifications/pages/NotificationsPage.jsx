@@ -14,15 +14,15 @@ export default function NotificationsPage() {
 
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h1 className="text-2xl font-black text-black">Notificaciones</h1>
+          <h1 className="text-2xl font-black text-white">Notificaciones</h1>
           {unread > 0 && (
-            <p className="text-xs text-gray-400 mt-0.5">{unread} sin leer</p>
+            <p className="text-xs text-neutral-500 mt-0.5">{unread} sin leer</p>
           )}
         </div>
         {unread > 0 && (
           <button
             onClick={handleMarkAll}
-            className="flex items-center gap-1.5 text-xs font-semibold text-black hover:underline"
+            className="flex items-center gap-1.5 text-xs font-semibold text-white hover:underline"
           >
             <CheckCheck size={14} /> Marcar todas como leídas
           </button>
@@ -30,12 +30,12 @@ export default function NotificationsPage() {
       </div>
 
       {items.length === 0 && (
-        <div className="bg-white border border-gray-100 p-16 text-center">
-          <div className="w-16 h-16 bg-gray-100 flex items-center justify-center mx-auto mb-4">
-            <BellOff size={28} className="text-gray-300" />
+        <div className="bg-superficie border border-white/10 p-16 text-center">
+          <div className="w-16 h-16 bg-superficie-2 flex items-center justify-center mx-auto mb-4">
+            <BellOff size={28} className="text-neutral-600" />
           </div>
-          <p className="text-base font-black text-black mb-1">Sin notificaciones</p>
-          <p className="text-sm text-gray-400">
+          <p className="text-base font-black text-white mb-1">Sin notificaciones</p>
+          <p className="text-sm text-neutral-500">
             Aquí aparecerán las actualizaciones de tus pedidos y novedades de la tienda.
           </p>
         </div>

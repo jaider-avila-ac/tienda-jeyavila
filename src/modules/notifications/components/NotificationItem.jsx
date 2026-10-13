@@ -53,28 +53,28 @@ export default function NotificationItem({ notif, onMarkRead, onDelete }) {
 
   return (
     <div className={`flex items-start gap-3 p-4 border transition-all ${
-      notif.leida ? 'bg-white border-gray-100' : 'bg-gray-50 border-gray-200'
+      notif.leida ? 'bg-superficie border-white/10' : 'bg-superficie-2 border-white/15'
     }`}>
 
       <div className={`w-9 h-9 flex items-center justify-center flex-shrink-0 mt-0.5 ${
-        notif.leida ? 'bg-gray-100' : 'bg-accent'
+        notif.leida ? 'bg-superficie-2' : 'bg-accent'
       }`}>
-        <Icon size={16} className={notif.leida ? 'text-gray-400' : 'text-white'} />
+        <Icon size={16} className={notif.leida ? 'text-neutral-500' : 'text-white'} />
       </div>
 
       <div className="flex-1 min-w-0 cursor-pointer" onClick={handleClick}>
-        <p className={`text-sm leading-snug ${notif.leida ? 'font-medium text-gray-700' : 'font-bold text-black'}`}>
+        <p className={`text-sm leading-snug ${notif.leida ? 'font-medium text-neutral-200' : 'font-bold text-white'}`}>
           {notif.titulo}
         </p>
-        <p className="text-xs text-gray-500 mt-0.5 leading-relaxed line-clamp-2">
+        <p className="text-xs text-neutral-400 mt-0.5 leading-relaxed line-clamp-2">
           {notif.mensaje}
         </p>
         <div className="flex items-center gap-3 mt-1.5">
-          <span className="text-[11px] text-gray-400">{tiempoRelativo(notif.creado_en)}</span>
+          <span className="text-[11px] text-neutral-500">{tiempoRelativo(notif.creado_en)}</span>
           {accion && (
             <button
               onClick={(e) => { e.stopPropagation(); handleClick() }}
-              className="flex items-center gap-1 text-[11px] font-semibold text-black hover:underline"
+              className="flex items-center gap-1 text-[11px] font-semibold text-white hover:underline"
             >
               Ver <ArrowRight size={10} />
             </button>
@@ -88,7 +88,7 @@ export default function NotificationItem({ notif, onMarkRead, onDelete }) {
 
       <button
         onClick={() => onDelete(notif.id)}
-        className="flex-shrink-0 p-1.5 text-gray-300 hover:text-red-500 hover:bg-red-50 transition-colors mt-0.5"
+        className="flex-shrink-0 p-1.5 text-neutral-600 hover:text-red-500 hover:bg-accent/10 transition-colors mt-0.5"
         title="Eliminar"
       >
         <Trash2 size={14} />

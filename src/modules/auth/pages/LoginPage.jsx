@@ -11,11 +11,11 @@ const GOOGLE_CLIENT_ID = import.meta.env.VITE_GOOGLE_CLIENT_ID
 
 function TermsText() {
   return (
-    <p className="text-center text-xs text-gray-400 leading-relaxed">
+    <p className="text-center text-xs text-neutral-500 leading-relaxed">
       Al continuar aceptas los{' '}
-      <a href="/terminos" target="_blank" rel="noopener noreferrer" className="font-bold text-black hover:underline">Términos de uso</a>
+      <a href="/terminos" target="_blank" rel="noopener noreferrer" className="font-bold text-white hover:underline">Términos de uso</a>
       {' '}y la{' '}
-      <a href="/privacidad" target="_blank" rel="noopener noreferrer" className="font-bold text-black hover:underline">Política de privacidad</a>.
+      <a href="/privacidad" target="_blank" rel="noopener noreferrer" className="font-bold text-white hover:underline">Política de privacidad</a>.
     </p>
   )
 }
@@ -170,7 +170,7 @@ export default function LoginPage() {
   }, [handleGoogleCredential, handleGoogleClick, inAppBrowser])
 
   return (
-    <div className="flex w-full h-screen overflow-hidden bg-white">
+    <div className="flex w-full h-screen overflow-hidden bg-superficie">
       {/* Panel lateral: foto de Jey en tarima (public/img; .jpg de respaldo para Safari viejo) */}
       <div className="flex-1 hidden md:flex relative items-center justify-center overflow-hidden bg-black">
         <img src="/img/tarima-sonriendo.webp" alt="" className="absolute inset-0 w-full h-full object-cover object-top" onError={(e) => { e.currentTarget.src = '/img/tarima-sonriendo.jpg' }} />
@@ -179,17 +179,17 @@ export default function LoginPage() {
       </div>
 
       {/* Formulario */}
-      <div className="w-full md:w-[470px] bg-white flex items-center justify-center overflow-y-auto px-10 py-12 border-l border-gray-100">
+      <div className="w-full md:w-[470px] bg-superficie flex items-center justify-center overflow-y-auto px-10 py-12 border-l border-white/10">
         <div className="w-full max-w-[380px] flex flex-col gap-6">
 
           {/* Logo */}
           <Link to="/" className="flex justify-center">
-            <img src="/logos/logo-negro.png" alt="Jey Avila Music" width="800" height="334" className="h-16 w-auto" />
+            <img src="/logos/logo-blanco.png" alt="Jey Avila Music" width="800" height="334" className="h-16 w-auto" />
           </Link>
 
           {/* Error */}
           {error && (
-            <div className="p-3 bg-red-50 border border-red-200 text-sm text-red-700 text-center">
+            <div className="p-3 bg-accent/10 border border-accent/40 text-sm text-red-400 text-center">
               {error}
             </div>
           )}
@@ -199,10 +199,10 @@ export default function LoginPage() {
           {/* Panel: social */}
           {view === 'social' && (
             <>
-              <h2 className="text-center text-2xl font-bold text-black">Iniciar sesión</h2>
+              <h2 className="text-center text-2xl font-bold text-white">Iniciar sesión</h2>
               <div className="space-y-3">
                 {inAppBrowser ? (
-                  <p className="p-3 bg-amber-50 border border-amber-200 text-xs text-amber-800 text-center leading-relaxed">
+                  <p className="p-3 bg-amber-500/10 border border-amber-500/30 text-xs text-amber-300 text-center leading-relaxed">
                     Google no permite iniciar sesión desde el navegador integrado de esta app.
                     Toca el menú (⋯) y elige <strong>"Abrir en Chrome"</strong> o <strong>"Abrir en el navegador"</strong>,
                     o usa "Continuar con correo" abajo.
@@ -211,7 +211,7 @@ export default function LoginPage() {
                   <div className="relative w-full min-h-[54px] flex items-center justify-center [&>div]:!w-full [&_iframe]:!w-full">
                     <div ref={googleBtnRef} className="w-full" />
                     {googleLoading && (
-                      <div className="absolute inset-0 bg-white/90 flex items-center justify-center gap-2 text-sm font-semibold text-black">
+                      <div className="absolute inset-0 bg-black/85 flex items-center justify-center gap-2 text-sm font-semibold text-white">
                         <Loader2 size={18} className="animate-spin" /> Continuando…
                       </div>
                     )}
@@ -219,14 +219,14 @@ export default function LoginPage() {
                 )}
                 <button
                   onClick={() => setView('email')}
-                  className="w-full h-[54px] border border-gray-200 text-[15px] font-semibold text-black bg-white hover:border-accent hover:bg-gray-50 transition-colors flex items-center justify-center active:scale-[0.98]"
+                  className="w-full h-[54px] border border-white/15 text-[15px] font-semibold text-white bg-superficie hover:border-accent hover:bg-superficie-2 transition-colors flex items-center justify-center active:scale-[0.98]"
                 >
                   Continuar con correo
                 </button>
               </div>
-              <p className="text-center text-sm text-gray-500">
+              <p className="text-center text-sm text-neutral-400">
                 ¿No tienes cuenta?{' '}
-                <Link to="/registro" className="font-bold text-black hover:underline">Regístrate</Link>
+                <Link to="/registro" className="font-bold text-white hover:underline">Regístrate</Link>
               </p>
               <TermsText />
             </>
@@ -235,28 +235,28 @@ export default function LoginPage() {
           {/* Panel: email */}
           {view === 'email' && (
             <>
-              <h2 className="text-center text-2xl font-bold text-black">Iniciar sesión</h2>
+              <h2 className="text-center text-2xl font-bold text-white">Iniciar sesión</h2>
               <form onSubmit={handleEmailLogin} className="space-y-4">
                 <div>
-                  <label className="block text-xs font-bold text-gray-500 uppercase tracking-wide mb-1.5">
+                  <label className="block text-xs font-bold text-neutral-400 uppercase tracking-wide mb-1.5">
                     Correo electrónico
                   </label>
                   <input
                     type="email" required value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="correo@ejemplo.com"
-                    className="w-full px-4 py-3 border border-gray-200 text-sm focus:outline-none focus:border-accent transition-colors"
+                    className="w-full px-4 py-3 border border-white/15 text-sm focus:outline-none focus:border-accent transition-colors"
                   />
                 </div>
                 <div>
                   <div className="flex items-center justify-between mb-1.5">
-                    <label className="text-xs font-bold text-gray-500 uppercase tracking-wide">
+                    <label className="text-xs font-bold text-neutral-400 uppercase tracking-wide">
                       Contraseña
                     </label>
                     <button
                       type="button"
                       onClick={() => setView('forgot')}
-                      className="text-xs text-gray-500 hover:text-black transition-colors"
+                      className="text-xs text-neutral-400 hover:text-white transition-colors"
                     >
                       ¿Olvidaste tu contraseña?
                     </button>
@@ -266,12 +266,12 @@ export default function LoginPage() {
                       type={showPass ? 'text' : 'password'} required value={password}
                       onChange={(e) => setPassword(e.target.value)}
                       placeholder="••••••••"
-                      className="w-full px-4 py-3 pr-12 border border-gray-200 text-sm focus:outline-none focus:border-accent transition-colors"
+                      className="w-full px-4 py-3 pr-12 border border-white/15 text-sm focus:outline-none focus:border-accent transition-colors"
                     />
                     <button
                       type="button"
                       onClick={() => setShowPass((v) => !v)}
-                      className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-black"
+                      className="absolute right-4 top-1/2 -translate-y-1/2 text-neutral-500 hover:text-white"
                     >
                       {showPass ? <EyeOff size={16} /> : <Eye size={16} />}
                     </button>
@@ -285,11 +285,11 @@ export default function LoginPage() {
                 </button>
               </form>
               <div className="text-center space-y-2 text-sm">
-                <p className="text-gray-500">
+                <p className="text-neutral-400">
                   ¿No tienes cuenta?{' '}
-                  <Link to="/registro" className="font-bold text-black hover:underline">Regístrate</Link>
+                  <Link to="/registro" className="font-bold text-white hover:underline">Regístrate</Link>
                 </p>
-                <button onClick={() => setView('social')} className="text-xs text-gray-400 hover:text-black transition-colors">
+                <button onClick={() => setView('social')} className="text-xs text-neutral-500 hover:text-white transition-colors">
                   ← Volver
                 </button>
               </div>
@@ -330,8 +330,8 @@ function ForgotInline({ onBack }) {
   if (sent) {
     return (
       <>
-        <h2 className="text-center text-2xl font-bold text-black">Código enviado</h2>
-        <p className="text-center text-sm text-gray-500">
+        <h2 className="text-center text-2xl font-bold text-white">Código enviado</h2>
+        <p className="text-center text-sm text-neutral-400">
           Si el correo existe, recibirás un código en los próximos minutos.
         </p>
         <button
@@ -340,7 +340,7 @@ function ForgotInline({ onBack }) {
         >
           Ingresar código
         </button>
-        <button onClick={onBack} className="text-xs text-gray-400 hover:text-black transition-colors text-center">
+        <button onClick={onBack} className="text-xs text-neutral-500 hover:text-white transition-colors text-center">
           ← Volver al login
         </button>
       </>
@@ -349,19 +349,19 @@ function ForgotInline({ onBack }) {
 
   return (
     <>
-      <h2 className="text-center text-2xl font-bold text-black">Olvidé mi contraseña</h2>
-      <p className="text-center text-sm text-gray-500">
+      <h2 className="text-center text-2xl font-bold text-white">Olvidé mi contraseña</h2>
+      <p className="text-center text-sm text-neutral-400">
         Te enviaremos un código de 6 dígitos para restablecerla.
       </p>
       {error && (
-        <div className="p-3 bg-red-50 border border-red-200 text-sm text-red-700 text-center">{error}</div>
+        <div className="p-3 bg-accent/10 border border-accent/40 text-sm text-red-400 text-center">{error}</div>
       )}
       <form onSubmit={handleSubmit} className="space-y-4">
         <input
           type="email" required value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="tu@correo.com"
-          className="w-full px-4 py-3 border border-gray-200 text-sm focus:outline-none focus:border-accent transition-colors"
+          className="w-full px-4 py-3 border border-white/15 text-sm focus:outline-none focus:border-accent transition-colors"
         />
         <button
           type="submit" disabled={loading}
@@ -370,7 +370,7 @@ function ForgotInline({ onBack }) {
           {loading ? <><Loader2 size={16} className="animate-spin" />Enviando…</> : 'Enviar código'}
         </button>
       </form>
-      <button onClick={onBack} className="text-xs text-gray-400 hover:text-black transition-colors text-center">
+      <button onClick={onBack} className="text-xs text-neutral-500 hover:text-white transition-colors text-center">
         ← Volver al login
       </button>
     </>

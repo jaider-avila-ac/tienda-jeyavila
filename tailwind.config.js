@@ -10,15 +10,18 @@ export default {
         //                  el rojo siempre va en blanco (nunca negro sobre rojo).
         // accent-dark   → variante oscura del rojo, para hover de botones CTA
         // complementario→ gris claro para degradados y acentos secundarios
-        // aux           → fondo de la página: gris muy claro, para que las tarjetas blancas
-        //                  (productos, header de checkout) floten sobre él
+        // aux           → fondo de la página: negro, como el sitio de Jey (tienda en modo oscuro)
+        // superficie    → tarjetas, paneles, formularios y modales sobre el fondo negro
+        // superficie-2  → un nivel más claro: campos, filas alternas, hover
         // black         → el negro del sitio (#0B0B0B); reskinea todas las clases bg-black/
         //                  text-black/border-black de la app sin tocar cada archivo.
         // ────────────────────────────────────────────────────────────────────
         accent:          '#CF001B',
         'accent-dark':   '#A50016',
         complementario:  '#E5E5E5',
-        aux:             '#F4F4F4',
+        aux:             '#0B0B0B',
+        superficie:      '#151515',
+        'superficie-2':  '#1F1F1F',
         black:           '#0B0B0B',
       },
       fontFamily: {

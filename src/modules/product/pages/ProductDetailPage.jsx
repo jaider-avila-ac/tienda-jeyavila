@@ -112,7 +112,7 @@ function Stars({ count, size = 14 }) {
     <div className="flex items-center gap-0.5">
       {[1, 2, 3, 4, 5].map((n) => (
         <Star key={n} size={size}
-          className={n <= count ? 'text-amber-400 fill-amber-400' : 'text-gray-200 fill-gray-200'} />
+          className={n <= count ? 'text-amber-400 fill-amber-400' : 'text-neutral-700 fill-neutral-700'} />
       ))}
     </div>
   )
@@ -131,7 +131,7 @@ function StarsInput({ value, onChange, size = 22 }) {
           className="p-0.5 hover:scale-110 transition-transform"
         >
           <Star size={size}
-            className={n <= value ? 'text-amber-400 fill-amber-400' : 'text-gray-200 fill-gray-200'} />
+            className={n <= value ? 'text-amber-400 fill-amber-400' : 'text-neutral-700 fill-neutral-700'} />
         </button>
       ))}
     </div>
@@ -333,7 +333,7 @@ export default function ProductDetailPage() {
 
   if (loading) {
     return (
-      <div className="max-w-7xl mx-auto px-6 flex flex-col items-center justify-center gap-3 min-h-[70vh] text-gray-400 text-sm">
+      <div className="max-w-7xl mx-auto px-6 flex flex-col items-center justify-center gap-3 min-h-[70vh] text-neutral-500 text-sm">
         <Loader2 size={28} className="animate-spin" />
         Cargando producto…
       </div>
@@ -343,8 +343,8 @@ export default function ProductDetailPage() {
   if (serviceDown) {
     return (
       <div className="max-w-7xl mx-auto px-6 py-20 text-center">
-        <p className="text-xl font-bold text-black">No pudimos conectar con el servidor</p>
-        <p className="text-sm text-gray-500 mt-2">Verifica tu conexión e intenta de nuevo.</p>
+        <p className="text-xl font-bold text-white">No pudimos conectar con el servidor</p>
+        <p className="text-sm text-neutral-400 mt-2">Verifica tu conexión e intenta de nuevo.</p>
         <button onClick={() => window.location.reload()} className="btn-primary mt-5 mx-auto">Reintentar</button>
       </div>
     )
@@ -353,7 +353,7 @@ export default function ProductDetailPage() {
   if (notFound || !product) {
     return (
       <div className="max-w-7xl mx-auto px-6 py-20 text-center">
-        <p className="text-xl font-bold text-black">Producto no encontrado</p>
+        <p className="text-xl font-bold text-white">Producto no encontrado</p>
         <button onClick={() => navigate('/')} className="btn-primary mt-5 mx-auto">Ir al inicio</button>
       </div>
     )
@@ -467,20 +467,20 @@ export default function ProductDetailPage() {
     <div className="max-w-7xl mx-auto px-6 py-6 pb-16">
 
       {/* Breadcrumb */}
-      <nav className="flex items-center gap-1.5 text-xs text-gray-400 mb-6 flex-wrap">
-        <Link to="/" className="hover:text-black transition-colors">Inicio</Link>
+      <nav className="flex items-center gap-1.5 text-xs text-neutral-500 mb-6 flex-wrap">
+        <Link to="/" className="hover:text-white transition-colors">Inicio</Link>
         <ChevronRight size={11} />
-        <Link to="/catalogo" className="hover:text-black transition-colors">Catálogo</Link>
+        <Link to="/catalogo" className="hover:text-white transition-colors">Catálogo</Link>
         {category && (
           <>
             <ChevronRight size={11} />
-            <Link to={`/catalogo?categoria=${category.id}`} className="hover:text-black transition-colors">
+            <Link to={`/catalogo?categoria=${category.id}`} className="hover:text-white transition-colors">
               {category.nombre}
             </Link>
           </>
         )}
         <ChevronRight size={11} />
-        <span className="text-gray-700 font-medium line-clamp-1 max-w-xs">{product.nombre}</span>
+        <span className="text-neutral-200 font-medium line-clamp-1 max-w-xs">{product.nombre}</span>
       </nav>
 
       {/* Grid principal */}
@@ -492,7 +492,7 @@ export default function ProductDetailPage() {
 
             {/* Visor principal — el contenedor siempre mide igual (aspect-square);
                 object-contain evita recortes, así ninguna imagen se ve más "grande" que otra */}
-            <div className="order-1 lg:order-2 flex-1 bg-gray-50 overflow-hidden aspect-square">
+            <div className="order-1 lg:order-2 flex-1 bg-superficie-2 overflow-hidden aspect-square">
               {mediaItems[activeMedia]?.type === 'video'
                 ? (
                   <video
@@ -520,7 +520,7 @@ export default function ProductDetailPage() {
                     key={i}
                     onClick={() => setActiveMedia(i)}
                     className={`flex-shrink-0 w-16 h-16 overflow-hidden border-2 transition-all ${
-                      activeMedia === i ? 'border-accent' : 'border-transparent hover:border-gray-300'
+                      activeMedia === i ? 'border-accent' : 'border-transparent hover:border-white/25'
                     }`}
                   >
                     {item.type === 'video'
@@ -552,7 +552,7 @@ export default function ProductDetailPage() {
             </div>
             <button
               onClick={handleFavorito}
-              className="flex items-center gap-1.5 text-xs font-semibold text-gray-500 hover:text-accent transition-colors flex-shrink-0"
+              className="flex items-center gap-1.5 text-xs font-semibold text-neutral-400 hover:text-accent transition-colors flex-shrink-0"
             >
               <Heart size={16} className={favorito ? 'text-accent fill-accent' : ''} />
               {favorito ? 'En favoritos' : 'Agregar a favoritos'}
@@ -561,16 +561,16 @@ export default function ProductDetailPage() {
 
           {/* Marca + nombre + rating */}
           <div>
-            <p className="text-xs font-semibold text-gray-400 uppercase tracking-widest">
+            <p className="text-xs font-semibold text-neutral-500 uppercase tracking-widest">
               {product.marca} · {product.subcategoria}
             </p>
-            <h1 className="text-2xl sm:text-3xl font-black text-black leading-tight mt-1">
+            <h1 className="text-2xl sm:text-3xl font-black text-white leading-tight mt-1">
               {product.nombre}
             </h1>
             {tieneResenas && (
               <div className="flex items-center gap-2 mt-2">
                 <Stars count={Math.round(ratingPromedio)} />
-                <span className="text-xs text-gray-400">{ratingPromedio.toFixed(1)} · {totalResenas} reseñas</span>
+                <span className="text-xs text-neutral-500">{ratingPromedio.toFixed(1)} · {totalResenas} reseñas</span>
               </div>
             )}
           </div>
@@ -581,20 +581,20 @@ export default function ProductDetailPage() {
               <>
                 <div className="flex items-baseline gap-3 flex-wrap">
                   <span className="text-3xl font-black text-accent">{fmt(finalPrice)}</span>
-                  <span className="text-xl text-gray-400 line-through">{fmt(product.precio + precioExtra)}</span>
+                  <span className="text-xl text-neutral-500 line-through">{fmt(product.precio + precioExtra)}</span>
                   <span className="text-sm font-bold bg-accent text-white px-2 py-0.5 ">
                     -{product.descuento}% OFF
                   </span>
                 </div>
-                <p className="text-xs text-gray-500 mt-1">
-                  Ahorras <span className="font-semibold text-green-600">{fmt(product.precio - finalBase)}</span>
+                <p className="text-xs text-neutral-400 mt-1">
+                  Ahorras <span className="font-semibold text-green-400">{fmt(product.precio - finalBase)}</span>
                 </p>
               </>
             ) : (
-              <span className="text-3xl font-black text-black">{fmt(finalPrice)}</span>
+              <span className="text-3xl font-black text-white">{fmt(finalPrice)}</span>
             )}
             {precioExtra > 0 && (
-              <p className="text-xs text-gray-400 mt-0.5">Incluye +{fmt(precioExtra)} por la opción seleccionada</p>
+              <p className="text-xs text-neutral-500 mt-0.5">Incluye +{fmt(precioExtra)} por la opción seleccionada</p>
             )}
           </div>
 
@@ -604,10 +604,10 @@ export default function ProductDetailPage() {
             return (
               <div key={variante.nombre}>
                 <div className="flex items-center justify-between mb-2">
-                  <p className="text-sm font-bold text-black">
+                  <p className="text-sm font-bold text-white">
                     {variante.nombre}{selVal ? `: ${selVal}` : ''}
                     {(variante.requerido || requiredForStock.includes(variante.nombre)) && !selVal && (
-                      <span className="ml-1 text-[11px] font-normal text-gray-400">(requerido)</span>
+                      <span className="ml-1 text-[11px] font-normal text-neutral-500">(requerido)</span>
                     )}
                   </p>
                 </div>
@@ -646,7 +646,7 @@ export default function ProductDetailPage() {
                       >
                         {opcion.valor}
                         {opcion.precioExtra > 0 && !isOut && (
-                          <span className="block text-[9px] leading-none text-green-600">
+                          <span className="block text-[9px] leading-none text-green-400">
                             +{fmt(opcion.precioExtra)}
                           </span>
                         )}
@@ -662,7 +662,7 @@ export default function ProductDetailPage() {
           {/* Stock global — solo si no hay variantes */}
           {stock !== null && (
             <div className={`flex items-center gap-1.5 text-sm font-medium ${
-              stock === 0 ? 'text-red-500' : stock <= 5 ? 'text-amber-600' : 'text-green-600'
+              stock === 0 ? 'text-red-500' : stock <= 5 ? 'text-amber-400' : 'text-green-400'
             }`}>
               {stock === 0
                 ? <><XCircle size={14} /> Agotado</>
@@ -680,15 +680,15 @@ export default function ProductDetailPage() {
 
           {/* Cantidad + Agregar al carrito */}
           <div className="flex flex-col sm:flex-row gap-3">
-            <div className="flex items-center border-2 border-gray-200 overflow-hidden flex-shrink-0">
+            <div className="flex items-center border-2 border-white/15 overflow-hidden flex-shrink-0">
               <button onClick={() => setCantidad((q) => Math.max(1, q - 1))}
-                className="w-11 h-11 flex items-center justify-center hover:bg-gray-50 transition-colors">
+                className="w-11 h-11 flex items-center justify-center hover:bg-superficie-2 transition-colors">
                 <Minus size={16} />
               </button>
               <span className="w-10 text-center text-sm font-bold">{cantidad}</span>
               <button onClick={() => setCantidad((q) => Math.min(maxCantidad, q + 1))}
                 disabled={!allRequiredSelected || !allStockOptionsSelected || cantidad >= maxCantidad}
-                className="w-11 h-11 flex items-center justify-center hover:bg-gray-50 transition-colors disabled:opacity-30">
+                className="w-11 h-11 flex items-center justify-center hover:bg-superficie-2 transition-colors disabled:opacity-30">
                 <Plus size={16} />
               </button>
             </div>
@@ -707,7 +707,7 @@ export default function ProductDetailPage() {
           <div className="flex flex-col sm:flex-row gap-3">
             <a href={`https://wa.me/573181767828?text=${waText}`}
               target="_blank" rel="noopener noreferrer"
-              className="flex-1 flex items-center justify-center gap-2 border-2 border-gray-200 px-5 py-3 text-sm font-bold text-gray-700 hover:border-accent hover:text-black transition-all">
+              className="flex-1 flex items-center justify-center gap-2 border-2 border-white/15 px-5 py-3 text-sm font-bold text-neutral-200 hover:border-accent hover:text-white transition-all">
               <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 text-green-500" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
               </svg>
@@ -723,9 +723,9 @@ export default function ProductDetailPage() {
              
               { Icon: Shield, text: 'Compra segura' },
             ].map(({ Icon, text }) => (
-              <div key={text} className="flex flex-col items-center text-center gap-1.5 p-3 bg-gray-50 ">
-                <Icon size={18} className="text-black" />
-                <p className="text-xs text-gray-600 leading-tight">{text}</p>
+              <div key={text} className="flex flex-col items-center text-center gap-1.5 p-3 bg-superficie-2 ">
+                <Icon size={18} className="text-white" />
+                <p className="text-xs text-neutral-300 leading-tight">{text}</p>
               </div>
             ))}
           </div>
@@ -734,7 +734,7 @@ export default function ProductDetailPage() {
 
       {/* ── Tabs ── */}
       <div className="mt-12">
-        <div className="flex overflow-x-auto no-scrollbar border-b border-gray-200">
+        <div className="flex overflow-x-auto no-scrollbar border-b border-white/15">
           {[
             { key: 'caracteristicas', label: 'Características' },
             { key: 'descripcion', label: 'Descripción' },
@@ -743,7 +743,7 @@ export default function ProductDetailPage() {
           ].map((t) => (
             <button key={t.key} onClick={() => setTab(t.key)}
               className={`flex-shrink-0 whitespace-nowrap px-4 sm:px-5 py-3 text-sm font-semibold border-b-2 -mb-px transition-colors ${
-                tab === t.key ? 'border-accent text-black' : 'border-transparent text-gray-400 hover:text-gray-700'
+                tab === t.key ? 'border-accent text-white' : 'border-transparent text-neutral-500 hover:text-neutral-200'
               }`}>
               {t.label}
             </button>
@@ -755,9 +755,9 @@ export default function ProductDetailPage() {
             <div className="max-w-2xl">
               <div className="grid grid-cols-2 gap-x-4 sm:gap-x-10">
                 {caracteristicas.map(([label, value], i) => (
-                  <div key={label} className={`flex flex-col py-3 border-b border-gray-100 ${i < 3 ? 'sm:col-span-1' : ''}`}>
-                    <span className="text-[11px] font-semibold text-gray-400 uppercase tracking-wider mb-0.5">{label}</span>
-                    <span className="text-sm font-semibold text-black">{value}</span>
+                  <div key={label} className={`flex flex-col py-3 border-b border-white/10 ${i < 3 ? 'sm:col-span-1' : ''}`}>
+                    <span className="text-[11px] font-semibold text-neutral-500 uppercase tracking-wider mb-0.5">{label}</span>
+                    <span className="text-sm font-semibold text-white">{value}</span>
                   </div>
                 ))}
               </div>
@@ -766,7 +766,7 @@ export default function ProductDetailPage() {
 
           {tab === 'descripcion' && (
             <div className="max-w-2xl">
-              <p className="text-sm text-gray-700 leading-relaxed">
+              <p className="text-sm text-neutral-200 leading-relaxed">
                 {product.descripcion || 'Producto de alta calidad con materiales premium.'}
               </p>
             </div>
@@ -778,56 +778,56 @@ export default function ProductDetailPage() {
                 <>
                   <div className="flex items-center gap-8">
                     <div className="text-center">
-                      <p className="text-5xl font-black text-black">{ratingPromedio.toFixed(1)}</p>
+                      <p className="text-5xl font-black text-white">{ratingPromedio.toFixed(1)}</p>
                       <Stars count={Math.round(ratingPromedio)} size={16} />
-                      <p className="text-xs text-gray-400 mt-1">{totalResenas} reseñas</p>
+                      <p className="text-xs text-neutral-500 mt-1">{totalResenas} reseñas</p>
                     </div>
                     <div className="flex-1 space-y-1.5">
                       {resenas.distribucion.map(({ estrellas, porcentaje }) => (
                           <div key={estrellas} className="flex items-center gap-2">
-                            <span className="text-xs text-gray-500 w-3">{estrellas}</span>
+                            <span className="text-xs text-neutral-400 w-3">{estrellas}</span>
                             <Star size={10} className="text-amber-400 fill-amber-400 flex-shrink-0" />
-                            <div className="flex-1 h-1.5 bg-gray-100 overflow-hidden">
+                            <div className="flex-1 h-1.5 bg-superficie-2 overflow-hidden">
                               <div className="h-full bg-amber-400 " style={{ width: `${porcentaje}%` }} />
                             </div>
-                            <span className="text-xs text-gray-400 w-7">{porcentaje}%</span>
+                            <span className="text-xs text-neutral-500 w-7">{porcentaje}%</span>
                           </div>
                       ))}
                     </div>
                   </div>
-                  <hr className="border-gray-100" />
+                  <hr className="border-white/10" />
                   {listaResenas.map((r) => (
                     <div key={r.id}>
                       <div className="flex items-center gap-2.5 mb-1.5">
-                        <div className="w-8 h-8 bg-gray-100 flex items-center justify-center text-xs font-bold text-gray-600 flex-shrink-0">
+                        <div className="w-8 h-8 bg-superficie-2 flex items-center justify-center text-xs font-bold text-neutral-300 flex-shrink-0">
                           {r.autor?.[0] ?? '?'}
                         </div>
                         <div>
-                          <p className="text-xs font-semibold text-black">{r.autor}</p>
+                          <p className="text-xs font-semibold text-white">{r.autor}</p>
                           <Stars count={r.calificacion} size={11} />
                         </div>
-                        <span className="ml-auto text-xs text-gray-400">{formatFecha(r.creadoEn)}</span>
+                        <span className="ml-auto text-xs text-neutral-500">{formatFecha(r.creadoEn)}</span>
                       </div>
-                      {r.cuerpo && <p className="text-sm text-gray-600 ml-10">{r.cuerpo}</p>}
+                      {r.cuerpo && <p className="text-sm text-neutral-300 ml-10">{r.cuerpo}</p>}
                     </div>
                   ))}
                 </>
               ) : (
-                <p className="text-sm text-gray-500">Este producto aún no tiene reseñas.</p>
+                <p className="text-sm text-neutral-400">Este producto aún no tiene reseñas.</p>
               )}
 
               {puedeResenar && (
                 <>
-                  <hr className="border-gray-100" />
+                  <hr className="border-white/10" />
                   <div>
-                    <p className="text-sm font-bold text-black mb-2">Compraste este producto — cuéntanos qué te pareció</p>
+                    <p className="text-sm font-bold text-white mb-2">Compraste este producto — cuéntanos qué te pareció</p>
                     <StarsInput value={formCalificacion} onChange={setFormCalificacion} />
                     <textarea
                       value={formComentario}
                       onChange={(e) => setFormComentario(e.target.value)}
                       placeholder="Tu comentario (opcional)"
                       rows={3}
-                      className="mt-3 w-full text-sm border-2 border-gray-200 px-3 py-2 focus:outline-none focus:border-accent transition-colors resize-none"
+                      className="mt-3 w-full text-sm border-2 border-white/15 px-3 py-2 focus:outline-none focus:border-accent transition-colors resize-none"
                     />
                     {errorResena && (
                       <p className="text-xs text-red-500 flex items-center gap-1 mt-1.5">
@@ -846,7 +846,7 @@ export default function ProductDetailPage() {
               )}
 
               {isAuthenticated && estadoResena.compro && estadoResena.yaReseno && (
-                <p className="text-xs text-green-600 font-semibold flex items-center gap-1">
+                <p className="text-xs text-green-400 font-semibold flex items-center gap-1">
                   <Check size={13} /> Ya reseñaste este producto
                 </p>
               )}
@@ -856,17 +856,17 @@ export default function ProductDetailPage() {
           {tab === 'preguntas' && (
             <div className="max-w-2xl space-y-5">
               {preguntas.length === 0 ? (
-                <p className="text-sm text-gray-500">Todavía no hay preguntas sobre este producto — sé el primero.</p>
+                <p className="text-sm text-neutral-400">Todavía no hay preguntas sobre este producto — sé el primero.</p>
               ) : (
                 preguntas.map((p) => (
-                  <div key={p.id} className="pb-4 border-b border-gray-100 last:border-0">
+                  <div key={p.id} className="pb-4 border-b border-white/10 last:border-0">
                     <div className="flex items-center gap-2.5 mb-1.5">
-                      <div className="w-8 h-8 bg-gray-100 flex items-center justify-center text-xs font-bold text-gray-600 flex-shrink-0">
+                      <div className="w-8 h-8 bg-superficie-2 flex items-center justify-center text-xs font-bold text-neutral-300 flex-shrink-0">
                         {p.autor?.[0] ?? '?'}
                       </div>
                       <div>
-                        <p className="text-xs font-semibold text-black">{p.autor}</p>
-                        <p className="text-[11px] text-gray-400">
+                        <p className="text-xs font-semibold text-white">{p.autor}</p>
+                        <p className="text-[11px] text-neutral-500">
                           {formatFecha(p.creadoEn)}{p.editada ? ' · editada' : ''}
                         </p>
                       </div>
@@ -878,7 +878,7 @@ export default function ProductDetailPage() {
                           value={textoEditado}
                           onChange={(e) => setTextoEditado(e.target.value)}
                           rows={2}
-                          className="w-full text-sm border-2 border-gray-200 px-3 py-2 focus:outline-none focus:border-accent transition-colors resize-none"
+                          className="w-full text-sm border-2 border-white/15 px-3 py-2 focus:outline-none focus:border-accent transition-colors resize-none"
                         />
                         <div className="flex gap-2 mt-1.5">
                           <button onClick={() => handleGuardarEdicionPregunta(p.id)}
@@ -886,13 +886,13 @@ export default function ProductDetailPage() {
                             Guardar
                           </button>
                           <button onClick={() => setEditandoPregId(null)}
-                            className="text-xs font-semibold text-gray-500 hover:text-black px-3 py-1.5 transition-colors">
+                            className="text-xs font-semibold text-neutral-400 hover:text-white px-3 py-1.5 transition-colors">
                             Cancelar
                           </button>
                         </div>
                       </div>
                     ) : (
-                      <p className="text-sm text-gray-700 ml-10">{p.texto}</p>
+                      <p className="text-sm text-neutral-200 ml-10">{p.texto}</p>
                     )}
 
                     {p.esMia && editandoPregId !== p.id && (
@@ -902,14 +902,14 @@ export default function ProductDetailPage() {
                         {!p.respuestaTexto && (
                           <button
                             onClick={() => { setEditandoPregId(p.id); setTextoEditado(p.texto) }}
-                            className="text-[11px] font-semibold text-gray-400 hover:text-black transition-colors"
+                            className="text-[11px] font-semibold text-neutral-500 hover:text-white transition-colors"
                           >
                             Editar
                           </button>
                         )}
                         <button
                           onClick={() => handleEliminarPregunta(p.id)}
-                          className="text-[11px] font-semibold text-gray-400 hover:text-red-600 transition-colors"
+                          className="text-[11px] font-semibold text-neutral-500 hover:text-red-400 transition-colors"
                         >
                           Eliminar
                         </button>
@@ -918,25 +918,25 @@ export default function ProductDetailPage() {
 
                     {p.respuestaTexto ? (
                       <div className="ml-10 mt-2.5 pl-3 border-l-2 border-accent">
-                        <p className="text-[11px] font-bold text-black uppercase tracking-wide">Jey Avila Music responde</p>
-                        <p className="text-sm text-gray-700 mt-0.5">{p.respuestaTexto}</p>
+                        <p className="text-[11px] font-bold text-white uppercase tracking-wide">Jey Avila Music responde</p>
+                        <p className="text-sm text-neutral-200 mt-0.5">{p.respuestaTexto}</p>
                       </div>
                     ) : (
-                      <p className="text-xs text-gray-400 ml-10 mt-2">Esperando respuesta…</p>
+                      <p className="text-xs text-neutral-500 ml-10 mt-2">Esperando respuesta…</p>
                     )}
                   </div>
                 ))
               )}
 
-              <hr className="border-gray-100" />
+              <hr className="border-white/10" />
               <div>
-                <p className="text-sm font-bold text-black mb-2">¿Tienes una duda sobre este producto?</p>
+                <p className="text-sm font-bold text-white mb-2">¿Tienes una duda sobre este producto?</p>
                 <textarea
                   value={formPregunta}
                   onChange={(e) => setFormPregunta(e.target.value)}
                   placeholder={isAuthenticated ? 'Escribe tu pregunta…' : 'Inicia sesión para preguntar'}
                   rows={2}
-                  className="w-full text-sm border-2 border-gray-200 px-3 py-2 focus:outline-none focus:border-accent transition-colors resize-none"
+                  className="w-full text-sm border-2 border-white/15 px-3 py-2 focus:outline-none focus:border-accent transition-colors resize-none"
                 />
                 {errorPregunta && (
                   <p className="text-xs text-red-500 flex items-center gap-1 mt-1.5">
@@ -958,8 +958,8 @@ export default function ProductDetailPage() {
 
       {/* Relacionados */}
       {related.length > 0 && (
-        <section className="mt-10 pt-8 border-t border-gray-100">
-          <h2 className="text-base font-black text-black mb-4">También te puede gustar</h2>
+        <section className="mt-10 pt-8 border-t border-white/10">
+          <h2 className="text-base font-black text-white mb-4">También te puede gustar</h2>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
             {related.map((p) => <ProductCard key={p.id} product={p} />)}
           </div>

@@ -29,11 +29,11 @@ function brandLabel(value) {
 function MarcasPanel({ marcas: disponibles, seleccionadas, onToggle, onClear }) {
   return (
     <aside className="w-[200px] flex-shrink-0 hidden sm:block">
-      <div className="bg-white border border-gray-100 p-4 sticky top-24">
+      <div className="bg-superficie border border-white/10 p-4 sticky top-24">
         <div className="flex items-center justify-between mb-3">
-          <p className="text-xs font-black text-black uppercase tracking-widest">Marcas</p>
+          <p className="text-xs font-black text-white uppercase tracking-widest">Marcas</p>
           {seleccionadas.length > 0 && (
-            <button onClick={onClear} className="text-[11px] text-gray-400 hover:text-black transition-colors">
+            <button onClick={onClear} className="text-[11px] text-neutral-500 hover:text-white transition-colors">
               Limpiar
             </button>
           )}
@@ -46,7 +46,7 @@ function MarcasPanel({ marcas: disponibles, seleccionadas, onToggle, onClear }) 
                 <label className="flex items-center justify-between gap-2 py-1.5 cursor-pointer group">
                   <div className="flex items-center gap-2.5 min-w-0">
                     <div className={`w-4 h-4 flex-shrink-0 border-2 flex items-center justify-center transition-colors ${
-                      checked ? 'bg-accent border-accent' : 'border-gray-300 group-hover:border-gray-500'
+                      checked ? 'bg-accent border-accent' : 'border-white/25 group-hover:border-white/50'
                     }`}>
                       {checked && (
                         <svg width="8" height="6" viewBox="0 0 8 6" fill="none">
@@ -55,11 +55,11 @@ function MarcasPanel({ marcas: disponibles, seleccionadas, onToggle, onClear }) 
                       )}
                     </div>
                     <input type="checkbox" checked={checked} onChange={() => onToggle(key)} className="sr-only" />
-                    <span className={`text-sm truncate transition-colors ${checked ? 'font-bold text-black' : 'text-gray-600 group-hover:text-black'}`}>
+                    <span className={`text-sm truncate transition-colors ${checked ? 'font-bold text-white' : 'text-neutral-300 group-hover:text-white'}`}>
                       {nombre}
                     </span>
                   </div>
-                  <span className="text-[11px] text-gray-400 flex-shrink-0">{count}</span>
+                  <span className="text-[11px] text-neutral-500 flex-shrink-0">{count}</span>
                 </label>
               </li>
             )
@@ -157,9 +157,9 @@ export default function SearchPage() {
       {/* Sin query */}
       {!query && (
         <div className="text-center py-20">
-          <Search size={40} className="text-gray-200 mx-auto mb-4" />
-          <p className="text-base font-bold text-black">¿Qué estás buscando?</p>
-          <p className="text-sm text-gray-400 mt-1">Escribe en la barra para encontrar productos</p>
+          <Search size={40} className="text-neutral-700 mx-auto mb-4" />
+          <p className="text-base font-bold text-white">¿Qué estás buscando?</p>
+          <p className="text-sm text-neutral-500 mt-1">Escribe en la barra para encontrar productos</p>
         </div>
       )}
 
@@ -167,10 +167,10 @@ export default function SearchPage() {
         <>
           {/* Título */}
           <div className="mb-4">
-            <h1 className="text-xl font-black text-black">
-              Resultados para <span className="text-gray-500">"{query}"</span>
+            <h1 className="text-xl font-black text-white">
+              Resultados para <span className="text-neutral-400">"{query}"</span>
             </h1>
-            <p className="text-sm text-gray-400 mt-0.5">
+            <p className="text-sm text-neutral-500 mt-0.5">
               {baseResults.length} {baseResults.length === 1 ? 'producto encontrado' : 'productos encontrados'}
             </p>
           </div>
@@ -185,7 +185,7 @@ export default function SearchPage() {
                     key={key}
                     onClick={() => toggleMarca(key)}
                     className={`flex-shrink-0 px-3 py-1.5 text-xs font-semibold border transition-all ${
-                      active ? 'bg-accent text-white border-accent' : 'border-gray-200 text-gray-600 hover:border-accent'
+                      active ? 'bg-accent text-white border-accent' : 'border-white/15 text-neutral-300 hover:border-accent'
                     }`}
                   >
                     {nombre} <span className="opacity-60">({count})</span>
@@ -195,7 +195,7 @@ export default function SearchPage() {
               {marcasSel.length > 0 && (
                 <button
                   onClick={() => setParam('marcas', '')}
-                  className="flex-shrink-0 flex items-center gap-1 px-3 py-1.5 text-xs font-semibold border border-gray-200 text-gray-500 hover:border-red-400 hover:text-red-500 transition-all"
+                  className="flex-shrink-0 flex items-center gap-1 px-3 py-1.5 text-xs font-semibold border border-white/15 text-neutral-400 hover:border-red-400 hover:text-red-500 transition-all"
                 >
                   <X size={10} /> Limpiar
                 </button>
@@ -205,19 +205,19 @@ export default function SearchPage() {
 
           {/* Controles sort */}
           <div className="flex items-center justify-between mb-5">
-            <p className="text-sm text-gray-500">
-              <span className="font-bold text-black">{results.length}</span> resultado{results.length !== 1 ? 's' : ''}
-              {marcasSel.length > 0 && <span className="text-gray-400"> · {marcasSel.join(', ')}</span>}
+            <p className="text-sm text-neutral-400">
+              <span className="font-bold text-white">{results.length}</span> resultado{results.length !== 1 ? 's' : ''}
+              {marcasSel.length > 0 && <span className="text-neutral-500"> · {marcasSel.join(', ')}</span>}
             </p>
             <div className="relative">
               <select
                 value={sort}
                 onChange={(e) => setParam('sort', e.target.value)}
-                className="appearance-none bg-white border border-gray-200 pl-3 pr-8 py-1.5 text-xs font-medium focus:outline-none focus:ring-2 focus:ring-accent cursor-pointer"
+                className="appearance-none bg-superficie border border-white/15 pl-3 pr-8 py-1.5 text-xs font-medium focus:outline-none focus:ring-2 focus:ring-accent cursor-pointer"
               >
                 {SORT_OPTIONS.map((o) => <option key={o.value} value={o.value}>{o.label}</option>)}
               </select>
-              <ChevronDown size={12} className="absolute right-2.5 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none" />
+              <ChevronDown size={12} className="absolute right-2.5 top-1/2 -translate-y-1/2 text-neutral-500 pointer-events-none" />
             </div>
           </div>
 
@@ -236,11 +236,11 @@ export default function SearchPage() {
             <div className="flex-1 min-w-0">
               {results.length === 0 ? (
                 <div className="text-center py-20">
-                  <Search size={40} className="text-gray-200 mx-auto mb-4" />
-                  <p className="text-base font-bold text-black">Sin resultados para esta selección</p>
+                  <Search size={40} className="text-neutral-700 mx-auto mb-4" />
+                  <p className="text-base font-bold text-white">Sin resultados para esta selección</p>
                   <button
                     onClick={() => setParam('marcas', '')}
-                    className="mt-4 text-sm font-semibold text-black underline underline-offset-2"
+                    className="mt-4 text-sm font-semibold text-white underline underline-offset-2"
                   >
                     Quitar filtro de marcas
                   </button>

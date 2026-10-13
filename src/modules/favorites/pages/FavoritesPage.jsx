@@ -17,24 +17,24 @@ export default function FavoritesPage() {
   return (
     <div className="max-w-7xl mx-auto px-6 py-6 pb-16">
       <div className="mb-6">
-        <h1 className="text-2xl font-black text-black">Favoritos</h1>
-        <p className="text-xs text-gray-400 mt-0.5">Los productos que has guardado</p>
+        <h1 className="text-2xl font-black text-white">Favoritos</h1>
+        <p className="text-xs text-neutral-500 mt-0.5">Los productos que has guardado</p>
       </div>
 
       {loading && (
-        <div className="flex flex-col items-center justify-center gap-3 min-h-[50vh] text-gray-400 text-sm">
+        <div className="flex flex-col items-center justify-center gap-3 min-h-[50vh] text-neutral-500 text-sm">
           <Loader2 size={28} className="animate-spin" />
           Cargando…
         </div>
       )}
 
       {!loading && productos.length === 0 && (
-        <div className="bg-white border border-gray-100 p-16 text-center">
-          <div className="w-16 h-16 bg-gray-100 flex items-center justify-center mx-auto mb-4">
-            <HeartOff size={28} className="text-gray-300" />
+        <div className="bg-superficie border border-white/10 p-16 text-center">
+          <div className="w-16 h-16 bg-superficie-2 flex items-center justify-center mx-auto mb-4">
+            <HeartOff size={28} className="text-neutral-600" />
           </div>
-          <p className="text-base font-black text-black mb-1">Sin favoritos todavía</p>
-          <p className="text-sm text-gray-400">
+          <p className="text-base font-black text-white mb-1">Sin favoritos todavía</p>
+          <p className="text-sm text-neutral-500">
             Toca el corazón en cualquier producto para guardarlo aquí.
           </p>
         </div>

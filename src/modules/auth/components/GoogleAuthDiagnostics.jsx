@@ -44,17 +44,17 @@ export default function GoogleAuthDiagnostics({ forceVisible = false }) {
   }
 
   return (
-    <details open={forceVisible} className="border border-amber-300 bg-amber-50 text-amber-950 text-xs">
+    <details open={forceVisible} className="border border-amber-300 bg-amber-500/10 text-amber-200 text-xs">
       <summary className="cursor-pointer p-3 font-bold">
         Diagnóstico de acceso con Google ({events.length} eventos)
       </summary>
       <div className="px-3 pb-3 space-y-2">
         <p>No contiene la credencial de Google ni datos personales.</p>
-        <pre className="max-h-52 overflow-auto whitespace-pre-wrap break-all rounded bg-white p-2 border border-amber-200">
+        <pre className="max-h-52 overflow-auto whitespace-pre-wrap break-all rounded bg-superficie p-2 border border-amber-500/30">
           {report}
         </pre>
         <div className="flex gap-2">
-          <button type="button" onClick={copy} className="flex items-center gap-1 border border-amber-400 bg-white px-2 py-1 font-semibold">
+          <button type="button" onClick={copy} className="flex items-center gap-1 border border-amber-400 bg-superficie px-2 py-1 font-semibold">
             <Clipboard size={13} /> {copied ? 'Copiado' : 'Copiar diagnóstico'}
           </button>
           <button type="button" onClick={clearGoogleAuthEvents} className="flex items-center gap-1 px-2 py-1">

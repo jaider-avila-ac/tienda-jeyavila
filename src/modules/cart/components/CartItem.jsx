@@ -4,12 +4,12 @@ import { fmt } from '../../../utils/format'
 
 export default function CartItem({ item, onUpdateQty, onRemove }) {
   return (
-    <div className={`flex gap-4 bg-white border p-4 transition-opacity ${
+    <div className={`flex gap-4 bg-superficie border p-4 transition-opacity ${
       item.isOutOfStock
-        ? 'border-red-100 opacity-60'
+        ? 'border-accent/30 opacity-60'
         : item.isOverStock
-        ? 'border-amber-200'
-        : 'border-gray-100'
+        ? 'border-amber-500/30'
+        : 'border-white/10'
     }`}>
 
       {/* Imagen */}
@@ -18,7 +18,7 @@ export default function CartItem({ item, onUpdateQty, onRemove }) {
           <img
             src={item.imagen}
             alt={item.nombre}
-            className={`w-20 h-20 object-cover bg-gray-50 ${item.isOutOfStock ? 'grayscale' : ''}`}
+            className={`w-20 h-20 object-cover bg-superficie-2 ${item.isOutOfStock ? 'grayscale' : ''}`}
           />
         </Link>
         {item.isOutOfStock && (
@@ -33,7 +33,7 @@ export default function CartItem({ item, onUpdateQty, onRemove }) {
         <Link
           to={`/producto/${item.productId}`}
           className={`text-sm font-bold hover:underline line-clamp-2 leading-tight ${
-            item.isOutOfStock ? 'text-gray-400' : 'text-black'
+            item.isOutOfStock ? 'text-neutral-500' : 'text-white'
           }`}
         >
           {item.nombre}
@@ -41,18 +41,18 @@ export default function CartItem({ item, onUpdateQty, onRemove }) {
 
         <div className="flex flex-wrap gap-1.5 mt-1">
           {Object.entries(item.variantes ?? {}).map(([k, v]) => (
-            <span key={k} className="text-xs bg-gray-100 px-2 py-0.5 text-gray-500">
+            <span key={k} className="text-xs bg-superficie-2 px-2 py-0.5 text-neutral-400">
               {k}: {v}
             </span>
           ))}
         </div>
 
-        <p className={`text-base font-black mt-1 ${item.isOutOfStock ? 'text-gray-400' : 'text-black'}`}>
+        <p className={`text-base font-black mt-1 ${item.isOutOfStock ? 'text-neutral-500' : 'text-white'}`}>
           {fmt(item.precio)}
         </p>
 
         {item.isOverStock && (
-          <p className="text-xs text-amber-600 font-semibold flex items-center gap-1 mt-1">
+          <p className="text-xs text-amber-400 font-semibold flex items-center gap-1 mt-1">
             <AlertCircle size={11} />
             Solo hay {item.stockActual} {item.stockActual === 1 ? 'unidad disponible' : 'unidades disponibles'}
           </p>
@@ -60,11 +60,11 @@ export default function CartItem({ item, onUpdateQty, onRemove }) {
 
         <div className="flex items-center justify-between mt-2">
           <div className={`flex items-center border overflow-hidden ${
-            item.isOutOfStock ? 'border-gray-100 opacity-40 pointer-events-none' : 'border-gray-200'
+            item.isOutOfStock ? 'border-white/10 opacity-40 pointer-events-none' : 'border-white/15'
           }`}>
             <button
               onClick={() => onUpdateQty(item.key, item.cantidad - 1)}
-              className="w-8 h-8 flex items-center justify-center hover:bg-gray-50 text-gray-500"
+              className="w-8 h-8 flex items-center justify-center hover:bg-superficie-2 text-neutral-400"
             >
               <Minus size={13} />
             </button>
@@ -72,18 +72,18 @@ export default function CartItem({ item, onUpdateQty, onRemove }) {
             <button
               onClick={() => onUpdateQty(item.key, item.cantidad + 1)}
               disabled={item.cantidad >= item.stockActual}
-              className="w-8 h-8 flex items-center justify-center hover:bg-gray-50 text-gray-500 disabled:opacity-30"
+              className="w-8 h-8 flex items-center justify-center hover:bg-superficie-2 text-neutral-400 disabled:opacity-30"
             >
               <Plus size={13} />
             </button>
           </div>
           <div className="flex items-center gap-3">
-            <span className={`text-sm font-black ${item.isOutOfStock ? 'text-gray-400' : 'text-black'}`}>
+            <span className={`text-sm font-black ${item.isOutOfStock ? 'text-neutral-500' : 'text-white'}`}>
               {fmt(item.subtotal)}
             </span>
             <button
               onClick={() => onRemove(item.key)}
-              className="p-1.5 text-gray-300 hover:text-red-500 transition-colors"
+              className="p-1.5 text-neutral-600 hover:text-red-500 transition-colors"
             >
               <Trash2 size={15} />
             </button>

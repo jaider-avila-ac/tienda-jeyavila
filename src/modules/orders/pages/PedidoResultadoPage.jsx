@@ -63,7 +63,7 @@ export default function PedidoResultadoPage() {
     return (
       <div className="max-w-md mx-auto px-6 py-24 text-center">
         <XCircle size={40} className="text-red-500 mx-auto mb-4" />
-        <h1 className="text-lg font-black text-black">{error}</h1>
+        <h1 className="text-lg font-black text-white">{error}</h1>
         <Link to="/mis-compras" className="btn-primary inline-flex mt-6">Ver mis compras</Link>
       </div>
     )
@@ -72,15 +72,15 @@ export default function PedidoResultadoPage() {
   if (agotado) {
     return (
       <div className="max-w-md mx-auto px-6 py-24 text-center">
-        <Loader2 size={40} className="text-gray-400 mx-auto mb-4" />
-        <h1 className="text-lg font-black text-black">Tu pago está tardando más de lo normal</h1>
-        <p className="text-sm text-gray-400 mt-2">
+        <Loader2 size={40} className="text-neutral-500 mx-auto mb-4" />
+        <h1 className="text-lg font-black text-white">Tu pago está tardando más de lo normal</h1>
+        <p className="text-sm text-neutral-500 mt-2">
           Si ya aprobaste el pago en tu app, puede seguir confirmándose — revisa en "Mis compras"
           en unos minutos. Si no lo completaste, puedes intentar de nuevo sin problema.
         </p>
         <div className="flex flex-col gap-2 mt-6">
           <Link to="/mis-compras" className="btn-primary inline-flex justify-center">Ver mis compras</Link>
-          <Link to="/carrito" className="text-sm font-semibold text-gray-500 hover:text-black transition-colors">
+          <Link to="/carrito" className="text-sm font-semibold text-neutral-400 hover:text-white transition-colors">
             Intentar de nuevo
           </Link>
         </div>
@@ -91,9 +91,9 @@ export default function PedidoResultadoPage() {
   if (!pedido || pedido.estado === 'pendiente_pago') {
     return (
       <div className="max-w-md mx-auto px-6 py-24 text-center">
-        <Loader2 size={40} className="text-black mx-auto mb-4 animate-spin" />
-        <h1 className="text-lg font-black text-black">Confirmando tu pago…</h1>
-        <p className="text-sm text-gray-400 mt-2">Esto puede tardar unos segundos.</p>
+        <Loader2 size={40} className="text-white mx-auto mb-4 animate-spin" />
+        <h1 className="text-lg font-black text-white">Confirmando tu pago…</h1>
+        <p className="text-sm text-neutral-500 mt-2">Esto puede tardar unos segundos.</p>
       </div>
     )
   }
@@ -102,9 +102,9 @@ export default function PedidoResultadoPage() {
     return (
       <div className="max-w-md mx-auto px-6 py-24 text-center">
         <XCircle size={40} className="text-red-500 mx-auto mb-4" />
-        <h1 className="text-lg font-black text-black">El pago no fue aprobado</h1>
+        <h1 className="text-lg font-black text-white">El pago no fue aprobado</h1>
         {pedido.pago_motivo_rechazo && (
-          <p className="text-sm text-gray-400 mt-2">{pedido.pago_motivo_rechazo}</p>
+          <p className="text-sm text-neutral-500 mt-2">{pedido.pago_motivo_rechazo}</p>
         )}
         <Link to="/carrito" className="btn-primary inline-flex mt-6">Volver al carrito</Link>
       </div>
@@ -114,8 +114,8 @@ export default function PedidoResultadoPage() {
   return (
     <div className="max-w-md mx-auto px-6 py-24 text-center">
       <CheckCircle2 size={40} className="text-accent-dark mx-auto mb-4" />
-      <h1 className="text-lg font-black text-black">¡Compra confirmada!</h1>
-      <p className="text-sm text-gray-400 mt-2">Pedido #{pedido.numero}</p>
+      <h1 className="text-lg font-black text-white">¡Compra confirmada!</h1>
+      <p className="text-sm text-neutral-500 mt-2">Pedido #{pedido.numero}</p>
       <Link to="/mis-compras" className="btn-primary inline-flex mt-6">Ver mis compras</Link>
     </div>
   )

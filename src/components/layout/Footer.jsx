@@ -125,13 +125,13 @@ export default function Footer() {
       </div>
 
       {/* Bottom bar */}
-      <div className="bg-white text-black">
+      <div className="bg-superficie text-white">
         <div className="max-w-7xl mx-auto px-6 py-4 flex flex-col sm:flex-row items-center justify-between gap-2">
-          <p className="text-xs text-gray-600">© {new Date().getFullYear()} Jey Avila Music. Todos los derechos reservados.</p>
-          <p className="text-xs text-gray-600">Desarrollado por <a href="https://jaideravilastd.com" target="_blank" rel="noopener noreferrer" className="font-bold text-black hover:underline">Jaider Avila Studio</a></p>
+          <p className="text-xs text-neutral-300">© {new Date().getFullYear()} Jey Avila Music. Todos los derechos reservados.</p>
+          <p className="text-xs text-neutral-300">Desarrollado por <a href="https://jaideravilastd.com" target="_blank" rel="noopener noreferrer" className="font-bold text-white hover:underline">Jaider Avila Studio</a></p>
           <div className="flex items-center gap-3">
             {['Nequi', 'PSE', 'Visa', 'Mastercard'].map((p) => (
-              <span key={p} className="text-xs px-2 py-1 text-gray-500 font-medium">{p}</span>
+              <span key={p} className="text-xs px-2 py-1 text-neutral-400 font-medium">{p}</span>
             ))}
           </div>
         </div>

@@ -31,8 +31,8 @@ const ADDR_EMPTY = {
 
 function SectionCard({ title, children }) {
   return (
-    <section className="bg-white border border-gray-100 p-5 sm:p-6">
-      <h2 className="text-sm font-black text-black uppercase tracking-widest mb-5">{title}</h2>
+    <section className="bg-superficie border border-white/10 p-5 sm:p-6">
+      <h2 className="text-sm font-black text-white uppercase tracking-widest mb-5">{title}</h2>
       {children}
     </section>
   )
@@ -189,16 +189,16 @@ function DireccionForm({ inicial = ADDR_EMPTY, onSave, onCancel }) {
         </FormField>
       </div>
 
-      <div className="border-t border-gray-100 pt-4">
-        <p className="text-xs font-bold text-gray-500 uppercase tracking-wider mb-1">Datos de contacto</p>
-        <p className="text-xs text-gray-400 mb-3">Te llamaremos si hay un problema con la entrega.</p>
+      <div className="border-t border-white/10 pt-4">
+        <p className="text-xs font-bold text-neutral-400 uppercase tracking-wider mb-1">Datos de contacto</p>
+        <p className="text-xs text-neutral-500 mb-3">Te llamaremos si hay un problema con la entrega.</p>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <FormField label="Nombre y apellido">
             <FormInput value={form.contactoNombre} onChange={set('contactoNombre')} placeholder="Juan Pérez" />
           </FormField>
           <FormField label="Teléfono">
             <div className="flex">
-              <span className="flex items-center px-3 border border-gray-200 border-r-0 bg-gray-50 text-sm text-gray-500 flex-shrink-0">
+              <span className="flex items-center px-3 border border-white/15 border-r-0 bg-superficie-2 text-sm text-neutral-400 flex-shrink-0">
                 +57
               </span>
               <FormInput
@@ -217,7 +217,7 @@ function DireccionForm({ inicial = ADDR_EMPTY, onSave, onCancel }) {
         <button
           type="button"
           onClick={onCancel}
-          className="text-sm font-semibold text-gray-400 hover:text-black transition-colors"
+          className="text-sm font-semibold text-neutral-500 hover:text-white transition-colors"
         >
           Cancelar
         </button>
@@ -266,8 +266,8 @@ function DireccionesSection({ direcciones, onDireccionesSaved }) {
           {direcciones.map((direccion) => {
             if (modo?.id === direccion.id) {
               return (
-                <div key={direccion.id} className="border border-gray-200 p-4">
-                  <p className="text-xs font-black text-black uppercase tracking-widest mb-3">Editar dirección</p>
+                <div key={direccion.id} className="border border-white/15 p-4">
+                  <p className="text-xs font-black text-white uppercase tracking-widest mb-3">Editar dirección</p>
                   <DireccionForm
                     inicial={direccion}
                     onSave={(data) => handleEdit(direccion.id, data)}
@@ -277,16 +277,16 @@ function DireccionesSection({ direcciones, onDireccionesSaved }) {
               )
             }
             return (
-              <div key={direccion.id} className="flex items-start gap-3 p-4 border border-gray-100 bg-gray-50">
-                <MapPin size={16} className="text-gray-400 flex-shrink-0 mt-0.5" />
+              <div key={direccion.id} className="flex items-start gap-3 p-4 border border-white/10 bg-superficie-2">
+                <MapPin size={16} className="text-neutral-500 flex-shrink-0 mt-0.5" />
                 <div className="flex-1 min-w-0">
-                  <p className="text-sm font-bold text-black leading-snug">
+                  <p className="text-sm font-bold text-white leading-snug">
                     {direccion.direccion}{direccion.apartamento ? `, Apto ${direccion.apartamento}` : ''}
                   </p>
-                  <p className="text-xs text-gray-500 mt-0.5">
+                  <p className="text-xs text-neutral-400 mt-0.5">
                     {[direccion.barrio, direccion.municipio, direccion.departamento].filter(Boolean).join(', ')}
                   </p>
-                  <p className="text-xs text-gray-400 mt-0.5">
+                  <p className="text-xs text-neutral-500 mt-0.5">
                     {direccion.contactoNombre} · +57 {direccion.contactoTelefono}
                   </p>
                 </div>
@@ -294,7 +294,7 @@ function DireccionesSection({ direcciones, onDireccionesSaved }) {
                   <button
                     type="button"
                     onClick={() => setModo({ id: direccion.id })}
-                    className="p-1.5 text-gray-400 hover:text-black hover:bg-white transition-colors"
+                    className="p-1.5 text-neutral-500 hover:text-white hover:bg-superficie transition-colors"
                     title="Editar"
                   >
                     <Pencil size={14} />
@@ -302,7 +302,7 @@ function DireccionesSection({ direcciones, onDireccionesSaved }) {
                   <button
                     type="button"
                     onClick={() => handleDelete(direccion.id)}
-                    className="p-1.5 text-gray-400 hover:text-red-500 hover:bg-red-50 transition-colors"
+                    className="p-1.5 text-neutral-500 hover:text-red-500 hover:bg-accent/10 transition-colors"
                     title="Eliminar"
                   >
                     <Trash2 size={14} />
@@ -317,12 +317,12 @@ function DireccionesSection({ direcciones, onDireccionesSaved }) {
       {error && <p className="text-xs text-red-500 flex items-center gap-1 mb-3"><AlertCircle size={12} />{error}</p>}
 
       {direcciones.length === 0 && modo !== 'agregar' && (
-        <p className="text-sm text-gray-400 mb-4">Aún no tienes direcciones guardadas.</p>
+        <p className="text-sm text-neutral-500 mb-4">Aún no tienes direcciones guardadas.</p>
       )}
 
       {modo === 'agregar' && (
-        <div className="border border-gray-200 p-4 mb-4">
-          <p className="text-xs font-black text-black uppercase tracking-widest mb-3">Nueva dirección</p>
+        <div className="border border-white/15 p-4 mb-4">
+          <p className="text-xs font-black text-white uppercase tracking-widest mb-3">Nueva dirección</p>
           <DireccionForm onSave={handleAdd} onCancel={() => setModo(null)} />
         </div>
       )}
@@ -331,7 +331,7 @@ function DireccionesSection({ direcciones, onDireccionesSaved }) {
         <button
           type="button"
           onClick={() => setModo('agregar')}
-          className="flex items-center gap-2 text-sm font-bold text-black hover:underline"
+          className="flex items-center gap-2 text-sm font-bold text-white hover:underline"
         >
           <Plus size={15} /> Agregar dirección
         </button>
@@ -378,7 +378,7 @@ function PreferenciasSection({ profile, onProfileSaved }) {
           disabled={saving}
           className="mt-0.5 w-4 h-4 flex-shrink-0 accent-black"
         />
-        <span className="text-sm text-gray-600 leading-relaxed">
+        <span className="text-sm text-neutral-300 leading-relaxed">
           Quiero recibir ofertas y promociones de Jey Avila Music. Esto no afecta las notificaciones
           sobre tus pedidos (confirmación, envío, entrega), que siempre las recibes.
         </span>
@@ -442,7 +442,7 @@ function ContrasenaSection() {
                 <button
                   type="button"
                   onClick={toggle(key)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-black transition-colors"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-neutral-500 hover:text-white transition-colors"
                 >
                   {show[key] ? <EyeOff size={15} /> : <Eye size={15} />}
                 </button>
@@ -450,7 +450,7 @@ function ContrasenaSection() {
             </FormField>
           ))}
         </div>
-        <p className="text-[11px] text-gray-400">
+        <p className="text-[11px] text-neutral-500">
           Mínimo 8 caracteres. Usa letras, números y símbolos para mayor seguridad.
         </p>
         {error && <p className="text-xs text-red-500 flex items-center gap-1"><AlertCircle size={12} />{error}</p>}
@@ -477,7 +477,7 @@ function CerrarSesionSection() {
         type="button"
         onClick={handleLogout}
         disabled={loggingOut}
-        className="flex items-center gap-2 px-5 py-2.5 text-sm font-bold border border-gray-200 text-black hover:border-accent transition-colors active:scale-95 disabled:opacity-60"
+        className="flex items-center gap-2 px-5 py-2.5 text-sm font-bold border border-white/15 text-white hover:border-accent transition-colors active:scale-95 disabled:opacity-60"
       >
         <LogOut size={15} /> {loggingOut ? 'Cerrando sesión...' : 'Cerrar sesión'}
       </button>
@@ -515,15 +515,15 @@ export default function ConfiguracionPage() {
 
   return (
     <div className="max-w-7xl mx-auto px-6 py-6 pb-16">
-      <h1 className="text-2xl font-black text-black mb-6">Configuración</h1>
+      <h1 className="text-2xl font-black text-white mb-6">Configuración</h1>
       <div className="max-w-2xl space-y-4">
         {loading && (
-          <div className="bg-white border border-gray-100 p-5 text-sm text-gray-500">
+          <div className="bg-superficie border border-white/10 p-5 text-sm text-neutral-400">
             Cargando información...
           </div>
         )}
         {error && (
-          <div className="bg-red-50 border border-red-100 p-5 text-sm text-red-600 flex items-center gap-2">
+          <div className="bg-accent/10 border border-accent/30 p-5 text-sm text-red-400 flex items-center gap-2">
             <AlertCircle size={16} /> {error}
           </div>
         )}

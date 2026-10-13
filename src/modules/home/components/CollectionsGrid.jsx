@@ -15,7 +15,7 @@ export default function CollectionsGrid() {
   return (
     <section className="max-w-7xl mx-auto px-4 pt-10">
       <div className="mb-4">
-        <h2 className="text-base font-black text-black">Colecciones destacadas</h2>
+        <h2 className="text-base font-black text-white">Colecciones destacadas</h2>
       </div>
       <div className={`grid gap-3 ${colecciones.length === 1 ? 'grid-cols-1' : 'grid-cols-1 sm:grid-cols-2'}`}>
         {colecciones.map((col) => (
@@ -34,7 +34,7 @@ export default function CollectionsGrid() {
             <div className="relative z-10">
               <h3 className="text-white text-2xl font-black leading-tight">{col.nombre}</h3>
               {col.descripcion && (
-                <p className="text-gray-300 text-xs mt-1 line-clamp-2">{col.descripcion}</p>
+                <p className="text-neutral-300 text-xs mt-1 line-clamp-2">{col.descripcion}</p>
               )}
               <span className="inline-flex items-center gap-1 mt-4 text-xs font-semibold text-white bg-white/20 px-3 py-1.5 group-hover:bg-white/30 transition-colors">
                 Ver colección <ArrowRight size={11} />
