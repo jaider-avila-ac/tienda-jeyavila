@@ -333,28 +333,34 @@ export default function ProductDetailPage() {
 
   if (loading) {
     return (
-      <div className="bg-white max-w-7xl mx-auto px-6 flex flex-col items-center justify-center gap-3 min-h-[70vh] text-neutral-500 text-sm">
-        <Loader2 size={28} className="animate-spin" />
-        Cargando producto…
+      <div className="bg-white">
+        <div className="max-w-7xl mx-auto px-6 flex flex-col items-center justify-center gap-3 min-h-[70vh] text-neutral-500 text-sm">
+          <Loader2 size={28} className="animate-spin" />
+          Cargando producto…
+        </div>
       </div>
     )
   }
 
   if (serviceDown) {
     return (
-      <div className="bg-white max-w-7xl mx-auto px-6 py-20 text-center">
-        <p className="text-xl font-bold text-neutral-900">No pudimos conectar con el servidor</p>
-        <p className="text-sm text-neutral-500 mt-2">Verifica tu conexión e intenta de nuevo.</p>
-        <button onClick={() => window.location.reload()} className="btn-primary mt-5 mx-auto">Reintentar</button>
+      <div className="bg-white min-h-[70vh]">
+        <div className="max-w-7xl mx-auto px-6 py-20 text-center">
+          <p className="text-xl font-bold text-neutral-900">No pudimos conectar con el servidor</p>
+          <p className="text-sm text-neutral-500 mt-2">Verifica tu conexión e intenta de nuevo.</p>
+          <button onClick={() => window.location.reload()} className="btn-primary mt-5 mx-auto">Reintentar</button>
+        </div>
       </div>
     )
   }
 
   if (notFound || !product) {
     return (
-      <div className="bg-white max-w-7xl mx-auto px-6 py-20 text-center">
-        <p className="text-xl font-bold text-neutral-900">Producto no encontrado</p>
-        <button onClick={() => navigate('/')} className="btn-primary mt-5 mx-auto">Ir al inicio</button>
+      <div className="bg-white min-h-[70vh]">
+        <div className="max-w-7xl mx-auto px-6 py-20 text-center">
+          <p className="text-xl font-bold text-neutral-900">Producto no encontrado</p>
+          <button onClick={() => navigate('/')} className="btn-primary mt-5 mx-auto">Ir al inicio</button>
+        </div>
       </div>
     )
   }
@@ -465,8 +471,11 @@ export default function ProductDetailPage() {
 
   return (
     // El resto del sitio es oscuro (bg-aux a nivel de StoreLayout) — la ficha de producto va en
-    // claro a propósito (pedido explícito, igual que el catálogo), por eso cubre su propio fondo.
-    <div className="bg-white max-w-7xl mx-auto px-6 py-6 pb-16">
+    // claro a propósito (pedido explícito, igual que el catálogo). El fondo blanco va en un
+    // envoltorio de ancho completo (si no, solo se ve blanco el angosto contenido centrado y
+    // quedan franjas oscuras a los lados en pantallas anchas).
+    <div className="bg-white">
+    <div className="max-w-7xl mx-auto px-6 py-6 pb-16">
 
       {/* Breadcrumb */}
       <nav className="flex items-center gap-1.5 text-xs text-neutral-500 mb-6 flex-wrap">
@@ -967,6 +976,7 @@ export default function ProductDetailPage() {
           </div>
         </section>
       )}
+    </div>
     </div>
   )
 }
