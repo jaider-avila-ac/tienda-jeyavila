@@ -212,7 +212,6 @@ export default function HomePage() {
   // datos posiblemente desactualizados como si fueran en vivo.
   const activeProducts = backendOnline ? products.filter((p) => p.activo) : []
   const vendidos = activeProducts.filter((p) => p.etiquetas.includes('mas-vendido')).slice(0, 4)
-  const nuevos = activeProducts.filter((p) => p.etiquetas.includes('nuevo')).slice(0, 4)
   // Productos destacados: no dependen de ninguna etiqueta, así siempre hay contenido que mostrar
   // aunque no existan productos marcados "mas-vendido".
   const destacados = activeProducts.slice(0, 8)
@@ -320,16 +319,6 @@ export default function HomePage() {
 
       {/* ── Colecciones — nunca pegada al carrusel ni al final de la página ── */}
       <CollectionsGrid />
-
-      {/* ── Nuevos ingresos ── */}
-      {nuevos.length > 0 && (
-        <section className="max-w-7xl mx-auto px-4 pt-10">
-          <TituloSeccion to="/catalogo?etiqueta=nuevo">Nuevos ingresos</TituloSeccion>
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
-            {nuevos.map((p) => <ProductCard key={p.id} product={p} />)}
-          </div>
-        </section>
-      )}
 
       {/* ── Vistos recientemente ── */}
       {recientes.length > 0 && (
