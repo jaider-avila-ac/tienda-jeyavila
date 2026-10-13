@@ -107,7 +107,9 @@ export default function CatalogPage() {
   else if (activeCategory) pageTitle = activeCategory.nombre
 
   return (
-    <div className="pb-16">
+    // El resto del sitio es oscuro (bg-aux a nivel de StoreLayout) — el catálogo y la ficha de
+    // producto van en claro a propósito (pedido explícito), por eso cubren su propio fondo blanco.
+    <div className="bg-white pb-16">
 
       {/* ── Banner ── siempre negro, imagen con overlay si existe */}
       <div className="relative bg-accent overflow-hidden h-[220px] sm:h-[260px]">
@@ -121,6 +123,8 @@ export default function CatalogPage() {
         )}
         {/* Overlay negro siempre — hace que cualquier imagen quede oscura */}
         <div className="absolute inset-0 bg-black/65" />
+        {/* El banner sigue oscuro (foto + overlay negro) aunque el resto de la página ya es
+            clara — este texto va en blanco a propósito, por contraste con ese fondo oscuro. */}
         <div className="relative z-10 h-full flex items-center max-w-7xl mx-auto px-6">
           <div>
             <div className="flex items-center gap-1.5 text-xs text-white/50 mb-2">
@@ -142,7 +146,7 @@ export default function CatalogPage() {
             <button
               onClick={() => setFilter('subcategoria', '')}
               className={`flex-shrink-0 px-3 py-1.5 text-xs font-semibold border transition-all ${
-                !activeSub ? 'bg-accent text-white border-accent' : 'border-white/15 text-neutral-300 hover:border-accent'
+                !activeSub ? 'bg-accent text-white border-accent' : 'border-neutral-200 text-neutral-500 hover:border-accent'
               }`}
             >
               Todo
@@ -152,7 +156,7 @@ export default function CatalogPage() {
                 key={sub}
                 onClick={() => setFilter('subcategoria', activeSub === sub ? '' : sub)}
                 className={`flex-shrink-0 px-3 py-1.5 text-xs font-semibold border transition-all ${
-                  activeSub === sub ? 'bg-accent text-white border-accent' : 'border-white/15 text-neutral-300 hover:border-accent'
+                  activeSub === sub ? 'bg-accent text-white border-accent' : 'border-neutral-200 text-neutral-500 hover:border-accent'
                 }`}
               >
                 {sub}
@@ -163,17 +167,17 @@ export default function CatalogPage() {
 
         {/* ── Controles: conteo + sort + limpiar ── */}
         <div className="flex flex-wrap items-center justify-between gap-3 mb-5">
-          <p className="text-sm text-neutral-400">
+          <p className="text-sm text-neutral-500">
             {loading
               ? <span className="flex items-center gap-1.5 text-neutral-500"><Loader2 size={13} className="animate-spin" /> Cargando…</span>
-              : <><span className="font-bold text-white">{filtered.length}</span> productos</>
+              : <><span className="font-bold text-neutral-900">{filtered.length}</span> productos</>
             }
           </p>
           <div className="flex items-center gap-2">
             {hasRefinements && (
               <button
                 onClick={() => clearFilters({ preserveCategory: Boolean(categoriaId) })}
-                className="flex items-center gap-1 text-xs text-neutral-400 hover:text-white border border-white/15 px-3 py-1.5 hover:border-accent transition-colors"
+                className="flex items-center gap-1 text-xs text-neutral-500 hover:text-neutral-900 border border-neutral-200 px-3 py-1.5 hover:border-accent transition-colors"
               >
                 <X size={11} /> Limpiar filtros
               </button>
@@ -182,7 +186,7 @@ export default function CatalogPage() {
               <select
                 value={sort}
                 onChange={(e) => setFilter('sort', e.target.value)}
-                className="appearance-none bg-superficie border border-white/15 pl-3 pr-8 py-1.5 text-xs font-medium focus:outline-none focus:ring-2 focus:ring-accent cursor-pointer"
+                className="appearance-none bg-white border border-neutral-200 pl-3 pr-8 py-1.5 text-xs font-medium focus:outline-none focus:ring-2 focus:ring-accent cursor-pointer"
               >
                 {SORT_OPTIONS.map((o) => <option key={o.value} value={o.value}>{o.label}</option>)}
               </select>
@@ -200,7 +204,7 @@ export default function CatalogPage() {
         ) : filtered.length === 0 ? (
           <div className="text-center py-20">
             <Search size={40} className="text-neutral-700 mx-auto mb-4" />
-            <p className="text-base font-bold text-white">Sin resultados</p>
+            <p className="text-base font-bold text-neutral-900">Sin resultados</p>
             <p className="text-sm text-neutral-500 mt-1">Intenta con otros filtros</p>
             <button
               onClick={() => clearFilters({ preserveCategory: Boolean(categoriaId) })}

@@ -96,12 +96,13 @@ h1, h2 { font-family: 'Unbounded', sans-serif; letter-spacing: -0.01em; }
   .badge-hot { @apply bg-accent-dark text-white text-xs font-bold px-2 py-0.5 ; }
 
   /* ── Selector de talla ───────────────── */
-  .size-btn { @apply h-8 min-w-8 px-1.5 border-2 border-white/15 text-xs font-semibold transition-all hover:border-accent; }
+  /* Solo las usa la ficha de producto de la tienda de Jey, que va en claro a propósito. */
+  .size-btn { @apply h-8 min-w-8 px-1.5 border-2 border-neutral-200 text-xs font-semibold transition-all hover:border-accent; }
   .size-btn-active { @apply border-accent bg-accent text-white; }
-  .size-btn-disabled { @apply border-white/10 text-neutral-600 cursor-not-allowed line-through; }
+  .size-btn-disabled { @apply border-neutral-100 text-neutral-400 cursor-not-allowed line-through; }
 
   /* ── Punto de color ──────────────────── */
-  .color-dot { @apply w-6 h-6 border-2 border-white/15 cursor-pointer transition-all hover:scale-110; }
+  .color-dot { @apply w-6 h-6 border-2 border-neutral-200 cursor-pointer transition-all hover:scale-110; }
   .color-dot-active { @apply border-accent scale-110 ring-2 ring-accent ring-offset-2; }
   .color-dot-disabled { @apply opacity-25 cursor-not-allowed hover:scale-100; }
 

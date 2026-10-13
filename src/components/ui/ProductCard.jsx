@@ -6,10 +6,10 @@ import { useWishlist } from '../../context/WishlistContext'
 import { useInViewOnce } from '../../hooks/useInViewOnce'
 
 // ══════════════════════════════════════════════════════════════════════════
-// Tarjeta de producto de la tienda de Jey Avila: la foto sobre fondo blanco (así se ven las
-// fotos de producto, que vienen con fondo blanco) y la información en un bloque oscuro, con el
-// nombre en mayúsculas, el precio grande y un botón rojo a lo ancho. El botón lleva a la página
-// del producto, donde se elige talla/color antes de agregar al carrito.
+// Tarjeta de producto de la tienda de Jey Avila: a propósito en claro (el resto del sitio es
+// oscuro, pero el catálogo y la ficha de producto van en blanco — pedido explícito, para que
+// se lean mejor fotos y precios). Nombre en mayúsculas, precio grande y botón rojo a lo ancho,
+// que lleva a la página del producto, donde se elige talla/color antes de agregar al carrito.
 // ══════════════════════════════════════════════════════════════════════════
 export default function ProductCard({ product }) {
   const { id, slug, nombre, marca, imagenes, precio, precioFinal, descuento, etiquetas, tallas, ratingPromedio, totalResenas } = product
@@ -42,7 +42,7 @@ export default function ProductCard({ product }) {
     <Link
       ref={inViewRef}
       to={href}
-      className={`group flex flex-col h-full bg-superficie border border-white/10 overflow-hidden hover:border-accent transition-[border-color,opacity,transform] duration-500 ease-out ${
+      className={`group flex flex-col h-full bg-white border border-neutral-200 overflow-hidden hover:border-accent transition-[border-color,opacity,transform] duration-500 ease-out ${
         inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
       }`}
     >
@@ -76,12 +76,12 @@ export default function ProductCard({ product }) {
         )}
       </div>
 
-      {/* Información, en oscuro */}
+      {/* Información */}
       <div className="flex flex-1 flex-col p-3.5 sm:p-4">
-        <h3 className="font-display text-xs sm:text-sm font-bold uppercase leading-snug text-white line-clamp-2">
+        <h3 className="font-display text-xs sm:text-sm font-bold uppercase leading-snug text-neutral-900 line-clamp-2">
           {nombre}
         </h3>
-        <p className="mt-1 text-[11px] text-neutral-400 truncate min-h-[16px]">{marca}</p>
+        <p className="mt-1 text-[11px] text-neutral-500 truncate min-h-[16px]">{marca}</p>
 
         {tieneResenas && (
           <div className="flex items-center gap-1 mt-1.5">
@@ -89,7 +89,7 @@ export default function ProductCard({ product }) {
               <Star
                 key={n}
                 size={9}
-                className={n <= Math.round(ratingPromedio) ? 'text-amber-400 fill-amber-400' : 'text-neutral-700 fill-neutral-700'}
+                className={n <= Math.round(ratingPromedio) ? 'text-amber-400 fill-amber-400' : 'text-neutral-200 fill-neutral-200'}
               />
             ))}
             <span className="text-[10px] text-neutral-500 ml-0.5">({totalResenas})</span>
@@ -98,11 +98,11 @@ export default function ProductCard({ product }) {
 
         <div className="mt-auto pt-3">
           {descuento > 0 && <p className="text-[11px] text-neutral-500 line-through">{fmt(precio)}</p>}
-          <p className="text-base sm:text-lg font-black text-white leading-none">
-            {fmt(finalPrice)} <span className="text-[10px] font-semibold text-neutral-400">COP</span>
+          <p className="text-base sm:text-lg font-black text-neutral-900 leading-none">
+            {fmt(finalPrice)} <span className="text-[10px] font-semibold text-neutral-500">COP</span>
           </p>
           <span className={`mt-3 block py-2.5 text-center text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.15em] transition-colors ${
-            hasStock ? 'bg-accent text-white group-hover:bg-accent-dark' : 'bg-white/10 text-neutral-400'
+            hasStock ? 'bg-accent text-white group-hover:bg-accent-dark' : 'bg-neutral-100 text-neutral-500'
           }`}>
             {hasStock ? 'Comprar' : 'Agotado'}
           </span>
