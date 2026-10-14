@@ -691,7 +691,7 @@ export default function ProductDetailPage() {
 
           {/* Cantidad + Agregar al carrito */}
           <div className="flex flex-col sm:flex-row gap-3">
-            <div className="flex items-center border-2 border-neutral-200 overflow-hidden flex-shrink-0">
+            <div className="flex items-center border-2 border-neutral-200 overflow-hidden flex-shrink-0 text-neutral-900">
               <button onClick={() => setCantidad((q) => Math.max(1, q - 1))}
                 className="w-11 h-11 flex items-center justify-center hover:bg-neutral-50 transition-colors">
                 <Minus size={16} />
