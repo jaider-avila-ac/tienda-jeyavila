@@ -8,7 +8,7 @@ const inputBaseDark =
 
 // Para los formularios que van sobre fondo blanco a propósito (carrito, mis compras — ver
 // ProductCard.jsx), igual que el resto del sitio es oscuro por defecto.
-const inputBaseLight =
+export const inputBaseLight =
   'w-full border border-neutral-200 px-4 py-2.5 text-sm font-medium text-neutral-900 bg-white ' +
   'placeholder-neutral-400 focus:outline-none focus:border-accent transition-colors'
 

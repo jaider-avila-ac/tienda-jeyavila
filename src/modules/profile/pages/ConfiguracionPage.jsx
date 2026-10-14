@@ -29,10 +29,12 @@ const ADDR_EMPTY = {
   contactoTelefono: '',
 }
 
+// A propósito en claro (ver ProductCard.jsx): configuración va en blanco, igual que el
+// catálogo y mis compras — el resto del sitio sigue oscuro.
 function SectionCard({ title, children }) {
   return (
-    <section className="bg-superficie border border-white/10 p-5 sm:p-6">
-      <h2 className="text-sm font-black text-white uppercase tracking-widest mb-5">{title}</h2>
+    <section className="bg-white border border-neutral-200 p-5 sm:p-6">
+      <h2 className="text-sm font-black text-neutral-900 uppercase tracking-widest mb-5">{title}</h2>
       {children}
     </section>
   )
@@ -92,28 +94,28 @@ function PersonalSection({ profile, onProfileSaved }) {
     <SectionCard title="Información personal">
       <form onSubmit={onSubmit} className="space-y-4">
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <FormField label="Nombre">
-            <FormInput value={form.nombre} onChange={set('nombre')} placeholder="Tu nombre" />
+          <FormField light label="Nombre">
+            <FormInput light value={form.nombre} onChange={set('nombre')} placeholder="Tu nombre" />
           </FormField>
-          <FormField label="Apellido">
-            <FormInput value={form.apellido} onChange={set('apellido')} placeholder="Tu apellido" />
+          <FormField light label="Apellido">
+            <FormInput light value={form.apellido} onChange={set('apellido')} placeholder="Tu apellido" />
           </FormField>
-          <FormField label="Correo electrónico">
-            <FormInput value={form.email} readOnly type="email" placeholder="correo@ejemplo.com" />
+          <FormField light label="Correo electrónico">
+            <FormInput light value={form.email} readOnly type="email" placeholder="correo@ejemplo.com" />
           </FormField>
-          <FormField label="Teléfono / Celular">
-            <FormInput value={form.telefono} onChange={set('telefono')} placeholder="+57 300 000 0000" />
+          <FormField light label="Teléfono / Celular">
+            <FormInput light value={form.telefono} onChange={set('telefono')} placeholder="+57 300 000 0000" />
           </FormField>
-          <FormField label="Tipo de documento">
-            <FormSelect value={form.tipoDocumento} onChange={set('tipoDocumento')}>
+          <FormField light label="Tipo de documento">
+            <FormSelect light value={form.tipoDocumento} onChange={set('tipoDocumento')}>
               {TIPOS_DOC.map((tipo) => <option key={tipo}>{tipo}</option>)}
             </FormSelect>
           </FormField>
-          <FormField label="Número de documento">
-            <FormInput value={form.numeroDocumento} onChange={set('numeroDocumento')} placeholder="1234567890" />
+          <FormField light label="Número de documento">
+            <FormInput light value={form.numeroDocumento} onChange={set('numeroDocumento')} placeholder="1234567890" />
           </FormField>
         </div>
-        {error && <p className="text-xs text-red-500 flex items-center gap-1"><AlertCircle size={12} />{error}</p>}
+        {error && <p className="text-xs text-red-600 flex items-center gap-1"><AlertCircle size={12} />{error}</p>}
         <div className="flex justify-end pt-1"><SaveButton saved={saved} saving={saving} /></div>
       </form>
     </SectionCard>
@@ -161,47 +163,48 @@ function DireccionForm({ inicial = ADDR_EMPTY, onSave, onCancel }) {
 
   return (
     <form onSubmit={onSubmit} className="space-y-4 pt-2">
-      <FormField label="Dirección o lugar de entrega">
-        <FormInput value={form.direccion} onChange={set('direccion')} placeholder="Ej: Carrera 71d #1-14 Sur" />
+      <FormField light label="Dirección o lugar de entrega">
+        <FormInput light value={form.direccion} onChange={set('direccion')} placeholder="Ej: Carrera 71d #1-14 Sur" />
       </FormField>
-      <FormField label="Complemento (opcional)">
-        <FormInput value={form.complemento} onChange={set('complemento')} placeholder="Sin complemento" />
+      <FormField light label="Complemento (opcional)">
+        <FormInput light value={form.complemento} onChange={set('complemento')} placeholder="Sin complemento" />
       </FormField>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        <FormField label="Departamento">
-          <FormSelect value={form.departamento} onChange={setDepartamento}>
+        <FormField light label="Departamento">
+          <FormSelect light value={form.departamento} onChange={setDepartamento}>
             <option value="">Selecciona un departamento</option>
             {DEPARTAMENTOS.map((dep) => <option key={dep}>{dep}</option>)}
           </FormSelect>
         </FormField>
-        <FormField label="Municipio / Localidad">
-          <FormSelect value={form.municipio} onChange={set('municipio')} disabled={!form.departamento}>
+        <FormField light label="Municipio / Localidad">
+          <FormSelect light value={form.municipio} onChange={set('municipio')} disabled={!form.departamento}>
             <option value="">{form.departamento ? 'Selecciona un municipio' : 'Primero elige un departamento'}</option>
             {municipioOptions.map((mun) => <option key={mun}>{mun}</option>)}
           </FormSelect>
         </FormField>
-        <FormField label="Barrio">
-          <FormInput value={form.barrio} onChange={set('barrio')} placeholder="Kennedy" />
+        <FormField light label="Barrio">
+          <FormInput light value={form.barrio} onChange={set('barrio')} placeholder="Kennedy" />
         </FormField>
-        <FormField label="Apartamento / Casa (opcional)">
-          <FormInput value={form.apartamento} onChange={set('apartamento')} placeholder="Ej: 201" />
+        <FormField light label="Apartamento / Casa (opcional)">
+          <FormInput light value={form.apartamento} onChange={set('apartamento')} placeholder="Ej: 201" />
         </FormField>
       </div>
 
-      <div className="border-t border-white/10 pt-4">
-        <p className="text-xs font-bold text-neutral-400 uppercase tracking-wider mb-1">Datos de contacto</p>
+      <div className="border-t border-neutral-200 pt-4">
+        <p className="text-xs font-bold text-neutral-500 uppercase tracking-wider mb-1">Datos de contacto</p>
         <p className="text-xs text-neutral-500 mb-3">Te llamaremos si hay un problema con la entrega.</p>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <FormField label="Nombre y apellido">
-            <FormInput value={form.contactoNombre} onChange={set('contactoNombre')} placeholder="Juan Pérez" />
+          <FormField light label="Nombre y apellido">
+            <FormInput light value={form.contactoNombre} onChange={set('contactoNombre')} placeholder="Juan Pérez" />
           </FormField>
-          <FormField label="Teléfono">
+          <FormField light label="Teléfono">
             <div className="flex">
-              <span className="flex items-center px-3 border border-white/15 border-r-0 bg-superficie-2 text-sm text-neutral-400 flex-shrink-0">
+              <span className="flex items-center px-3 border border-neutral-200 border-r-0 bg-neutral-100 text-sm text-neutral-500 flex-shrink-0">
                 +57
               </span>
               <FormInput
+                light
                 value={form.contactoTelefono}
                 onChange={set('contactoTelefono')}
                 placeholder="300 1234567"
@@ -212,12 +215,12 @@ function DireccionForm({ inicial = ADDR_EMPTY, onSave, onCancel }) {
         </div>
       </div>
 
-      {error && <p className="text-xs text-red-500 flex items-center gap-1"><AlertCircle size={12} />{error}</p>}
+      {error && <p className="text-xs text-red-600 flex items-center gap-1"><AlertCircle size={12} />{error}</p>}
       <div className="flex items-center gap-3 justify-end pt-1">
         <button
           type="button"
           onClick={onCancel}
-          className="text-sm font-semibold text-neutral-500 hover:text-white transition-colors"
+          className="text-sm font-semibold text-neutral-500 hover:text-neutral-900 transition-colors"
         >
           Cancelar
         </button>
@@ -266,8 +269,8 @@ function DireccionesSection({ direcciones, onDireccionesSaved }) {
           {direcciones.map((direccion) => {
             if (modo?.id === direccion.id) {
               return (
-                <div key={direccion.id} className="border border-white/15 p-4">
-                  <p className="text-xs font-black text-white uppercase tracking-widest mb-3">Editar dirección</p>
+                <div key={direccion.id} className="border border-neutral-200 p-4">
+                  <p className="text-xs font-black text-neutral-900 uppercase tracking-widest mb-3">Editar dirección</p>
                   <DireccionForm
                     inicial={direccion}
                     onSave={(data) => handleEdit(direccion.id, data)}
@@ -277,13 +280,13 @@ function DireccionesSection({ direcciones, onDireccionesSaved }) {
               )
             }
             return (
-              <div key={direccion.id} className="flex items-start gap-3 p-4 border border-white/10 bg-superficie-2">
+              <div key={direccion.id} className="flex items-start gap-3 p-4 border border-neutral-200 bg-neutral-50">
                 <MapPin size={16} className="text-neutral-500 flex-shrink-0 mt-0.5" />
                 <div className="flex-1 min-w-0">
-                  <p className="text-sm font-bold text-white leading-snug">
+                  <p className="text-sm font-bold text-neutral-900 leading-snug">
                     {direccion.direccion}{direccion.apartamento ? `, Apto ${direccion.apartamento}` : ''}
                   </p>
-                  <p className="text-xs text-neutral-400 mt-0.5">
+                  <p className="text-xs text-neutral-500 mt-0.5">
                     {[direccion.barrio, direccion.municipio, direccion.departamento].filter(Boolean).join(', ')}
                   </p>
                   <p className="text-xs text-neutral-500 mt-0.5">
@@ -294,7 +297,7 @@ function DireccionesSection({ direcciones, onDireccionesSaved }) {
                   <button
                     type="button"
                     onClick={() => setModo({ id: direccion.id })}
-                    className="p-1.5 text-neutral-500 hover:text-white hover:bg-superficie transition-colors"
+                    className="p-1.5 text-neutral-500 hover:text-neutral-900 hover:bg-white transition-colors"
                     title="Editar"
                   >
                     <Pencil size={14} />
@@ -302,7 +305,7 @@ function DireccionesSection({ direcciones, onDireccionesSaved }) {
                   <button
                     type="button"
                     onClick={() => handleDelete(direccion.id)}
-                    className="p-1.5 text-neutral-500 hover:text-red-500 hover:bg-accent/10 transition-colors"
+                    className="p-1.5 text-neutral-500 hover:text-red-500 hover:bg-accent/5 transition-colors"
                     title="Eliminar"
                   >
                     <Trash2 size={14} />
@@ -314,15 +317,15 @@ function DireccionesSection({ direcciones, onDireccionesSaved }) {
         </div>
       )}
 
-      {error && <p className="text-xs text-red-500 flex items-center gap-1 mb-3"><AlertCircle size={12} />{error}</p>}
+      {error && <p className="text-xs text-red-600 flex items-center gap-1 mb-3"><AlertCircle size={12} />{error}</p>}
 
       {direcciones.length === 0 && modo !== 'agregar' && (
         <p className="text-sm text-neutral-500 mb-4">Aún no tienes direcciones guardadas.</p>
       )}
 
       {modo === 'agregar' && (
-        <div className="border border-white/15 p-4 mb-4">
-          <p className="text-xs font-black text-white uppercase tracking-widest mb-3">Nueva dirección</p>
+        <div className="border border-neutral-200 p-4 mb-4">
+          <p className="text-xs font-black text-neutral-900 uppercase tracking-widest mb-3">Nueva dirección</p>
           <DireccionForm onSave={handleAdd} onCancel={() => setModo(null)} />
         </div>
       )}
@@ -331,7 +334,7 @@ function DireccionesSection({ direcciones, onDireccionesSaved }) {
         <button
           type="button"
           onClick={() => setModo('agregar')}
-          className="flex items-center gap-2 text-sm font-bold text-white hover:underline"
+          className="flex items-center gap-2 text-sm font-bold text-neutral-900 hover:underline"
         >
           <Plus size={15} /> Agregar dirección
         </button>
@@ -378,13 +381,13 @@ function PreferenciasSection({ profile, onProfileSaved }) {
           disabled={saving}
           className="mt-0.5 w-4 h-4 flex-shrink-0 accent-black"
         />
-        <span className="text-sm text-neutral-300 leading-relaxed">
+        <span className="text-sm text-neutral-600 leading-relaxed">
           Quiero recibir ofertas y promociones de Jey Avila Music. Esto no afecta las notificaciones
           sobre tus pedidos (confirmación, envío, entrega), que siempre las recibes.
         </span>
       </label>
       {saved && <p className="text-xs text-accent-dark mt-2 flex items-center gap-1"><Check size={12} /> Preferencia guardada</p>}
-      {error && <p className="text-xs text-red-500 mt-2 flex items-center gap-1"><AlertCircle size={12} />{error}</p>}
+      {error && <p className="text-xs text-red-600 mt-2 flex items-center gap-1"><AlertCircle size={12} />{error}</p>}
     </SectionCard>
   )
 }
@@ -430,9 +433,10 @@ function ContrasenaSection() {
             { key: 'nueva', label: 'Nueva contraseña' },
             { key: 'confirmar', label: 'Confirmar contraseña' },
           ].map(({ key, label }) => (
-            <FormField key={key} label={label}>
+            <FormField light key={key} label={label}>
               <div className="relative">
                 <FormInput
+                  light
                   type={show[key] ? 'text' : 'password'}
                   value={form[key]}
                   onChange={set(key)}
@@ -442,7 +446,7 @@ function ContrasenaSection() {
                 <button
                   type="button"
                   onClick={toggle(key)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-neutral-500 hover:text-white transition-colors"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-neutral-500 hover:text-neutral-900 transition-colors"
                 >
                   {show[key] ? <EyeOff size={15} /> : <Eye size={15} />}
                 </button>
@@ -453,7 +457,7 @@ function ContrasenaSection() {
         <p className="text-[11px] text-neutral-500">
           Mínimo 8 caracteres. Usa letras, números y símbolos para mayor seguridad.
         </p>
-        {error && <p className="text-xs text-red-500 flex items-center gap-1"><AlertCircle size={12} />{error}</p>}
+        {error && <p className="text-xs text-red-600 flex items-center gap-1"><AlertCircle size={12} />{error}</p>}
         <div className="flex justify-end pt-1"><SaveButton saved={saved} saving={saving} /></div>
       </form>
     </SectionCard>
@@ -477,7 +481,7 @@ function CerrarSesionSection() {
         type="button"
         onClick={handleLogout}
         disabled={loggingOut}
-        className="flex items-center gap-2 px-5 py-2.5 text-sm font-bold border border-white/15 text-white hover:border-accent transition-colors active:scale-95 disabled:opacity-60"
+        className="flex items-center gap-2 px-5 py-2.5 text-sm font-bold border border-neutral-200 text-neutral-900 hover:border-accent transition-colors active:scale-95 disabled:opacity-60"
       >
         <LogOut size={15} /> {loggingOut ? 'Cerrando sesión...' : 'Cerrar sesión'}
       </button>
@@ -514,31 +518,33 @@ export default function ConfiguracionPage() {
   }
 
   return (
-    <div className="max-w-7xl mx-auto px-6 py-6 pb-16">
-      <h1 className="text-2xl font-black text-white mb-6">Configuración</h1>
-      <div className="max-w-2xl space-y-4">
-        {loading && (
-          <div className="bg-superficie border border-white/10 p-5 text-sm text-neutral-400">
-            Cargando información...
-          </div>
-        )}
-        {error && (
-          <div className="bg-accent/10 border border-accent/30 p-5 text-sm text-red-400 flex items-center gap-2">
-            <AlertCircle size={16} /> {error}
-          </div>
-        )}
-        {!loading && !error && (
-          <>
-            <PersonalSection profile={profile} onProfileSaved={setProfile} />
-            <DireccionesSection
-              direcciones={profile.direcciones}
-              onDireccionesSaved={handleDireccionesSaved}
-            />
-            <PreferenciasSection profile={profile} onProfileSaved={setProfile} />
-            <ContrasenaSection />
-            <CerrarSesionSection />
-          </>
-        )}
+    <div className="bg-white min-h-[70vh]">
+      <div className="max-w-7xl mx-auto px-6 py-6 pb-16">
+        <h1 className="text-2xl font-black text-neutral-900 mb-6">Configuración</h1>
+        <div className="max-w-2xl space-y-4">
+          {loading && (
+            <div className="bg-white border border-neutral-200 p-5 text-sm text-neutral-500">
+              Cargando información...
+            </div>
+          )}
+          {error && (
+            <div className="bg-accent/5 border border-accent/40 p-5 text-sm text-red-600 flex items-center gap-2">
+              <AlertCircle size={16} /> {error}
+            </div>
+          )}
+          {!loading && !error && (
+            <>
+              <PersonalSection profile={profile} onProfileSaved={setProfile} />
+              <DireccionesSection
+                direcciones={profile.direcciones}
+                onDireccionesSaved={handleDireccionesSaved}
+              />
+              <PreferenciasSection profile={profile} onProfileSaved={setProfile} />
+              <ContrasenaSection />
+              <CerrarSesionSection />
+            </>
+          )}
+        </div>
       </div>
     </div>
   )

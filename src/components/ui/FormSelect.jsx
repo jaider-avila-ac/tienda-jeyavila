@@ -1,8 +1,9 @@
-import { inputBase } from './FormInput'
+import { inputBase, inputBaseLight } from './FormInput'
 
-export default function FormSelect({ className = '', children, ...props }) {
+export default function FormSelect({ light = false, className = '', children, ...props }) {
+  const base = light ? inputBaseLight : inputBase
   return (
-    <select className={`${inputBase}${className ? ` ${className}` : ''}`} {...props}>
+    <select className={`${base}${className ? ` ${className}` : ''}`} {...props}>
       {children}
     </select>
   )
