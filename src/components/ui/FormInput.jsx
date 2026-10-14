@@ -7,9 +7,11 @@ const inputBaseDark =
   'text-white placeholder-neutral-500 focus:outline-none focus:border-white/50 transition-colors text-[15px] font-medium'
 
 // Para los formularios que van sobre fondo blanco a propósito (carrito, mis compras — ver
-// ProductCard.jsx), igual que el resto del sitio es oscuro por defecto.
+// ProductCard.jsx), igual que el resto del sitio es oscuro por defecto. bg-white y text-neutral-900
+// llevan "!" porque el selector global de index.css (input:not([type=checkbox])...) tiene más
+// especificidad que una sola clase — sin el "!" ganaba siempre esa regla y el input quedaba negro.
 export const inputBaseLight =
-  'w-full border border-neutral-200 px-4 py-2.5 text-sm font-medium text-neutral-900 bg-white ' +
+  'w-full border border-neutral-200 px-4 py-2.5 text-sm font-medium !text-neutral-900 !bg-white ' +
   'placeholder-neutral-400 focus:outline-none focus:border-accent transition-colors'
 
 export default function FormInput({ dark = false, light = false, className = '', ...props }) {

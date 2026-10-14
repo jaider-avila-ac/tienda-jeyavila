@@ -133,7 +133,7 @@ export default function DevolucionPanel({ numero, estadoPedido }) {
                 value={codigo}
                 onChange={(e) => setCodigo(e.target.value)}
                 placeholder="Número de guía del envío"
-                className="flex-1 bg-white text-neutral-900 border border-neutral-200 px-3 py-1.5 text-xs focus:outline-none focus:border-accent"
+                className="flex-1 !bg-white !text-neutral-900 border border-neutral-200 px-3 py-1.5 text-xs focus:outline-none focus:border-accent"
               />
               <button
                 type="button"
