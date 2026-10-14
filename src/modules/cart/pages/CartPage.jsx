@@ -196,21 +196,25 @@ export default function CartPage() {
 
   if (cartLoading) {
     return (
-      <div className="max-w-7xl mx-auto px-6 py-20 text-center text-sm text-neutral-500">
-        Cargando tu carrito…
+      <div className="bg-white min-h-[70vh]">
+        <div className="max-w-7xl mx-auto px-6 py-20 text-center text-sm text-neutral-500">
+          Cargando tu carrito…
+        </div>
       </div>
     )
   }
 
   if (cart.length === 0) {
     return (
-      <div className="max-w-7xl mx-auto px-6 py-20 text-center">
-        <div className="w-20 h-20 bg-superficie-2 flex items-center justify-center mx-auto mb-5">
-          <ShoppingBag size={32} className="text-neutral-600" />
+      <div className="bg-white min-h-[70vh]">
+        <div className="max-w-7xl mx-auto px-6 py-20 text-center">
+          <div className="w-20 h-20 bg-neutral-100 flex items-center justify-center mx-auto mb-5">
+            <ShoppingBag size={32} className="text-neutral-400" />
+          </div>
+          <h2 className="text-xl font-black text-neutral-900">Tu carrito está vacío</h2>
+          <p className="text-neutral-500 text-sm mt-2 mb-6">Agrega productos para continuar</p>
+          <Link to="/" className="btn-primary inline-flex">Volver a la tienda</Link>
         </div>
-        <h2 className="text-xl font-black text-white">Tu carrito está vacío</h2>
-        <p className="text-neutral-500 text-sm mt-2 mb-6">Agrega productos para continuar</p>
-        <Link to="/" className="btn-primary inline-flex">Volver a la tienda</Link>
       </div>
     )
   }
@@ -225,13 +229,16 @@ export default function CartPage() {
   )
 
   return (
+    // A propósito en claro (ver ProductCard.jsx): carrito y mis compras van en blanco, igual que
+    // catálogo y ficha de producto — el resto del sitio sigue oscuro.
+    <div className="bg-white">
     <div className="max-w-7xl mx-auto px-6 py-6">
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
 
       {/* ── Lista de productos ──────────────────────── */}
       <div className="lg:col-span-2 space-y-3">
         <div className="flex items-center justify-between mb-2">
-          <h1 className="text-lg font-black text-white">
+          <h1 className="text-lg font-black text-neutral-900">
             Tu pedido ({count} {count === 1 ? 'artículo' : 'artículos'})
           </h1>
           <button onClick={clearCart} className="text-xs text-neutral-500 hover:text-red-500 transition-colors">
@@ -240,21 +247,21 @@ export default function CartPage() {
         </div>
 
         {hasCartIssues && (
-          <div className="flex items-start gap-3 bg-accent/10 border border-accent/40 p-3">
+          <div className="flex items-start gap-3 bg-accent/5 border border-accent/40 p-3">
             <AlertCircle size={15} className="text-red-500 flex-shrink-0 mt-0.5" />
-            <p className="text-xs font-semibold text-red-400 leading-snug">
+            <p className="text-xs font-semibold text-red-600 leading-snug">
               Algunos artículos tienen problemas de stock. Ajusta las cantidades o elimínalos para continuar.
             </p>
           </div>
         )}
 
         {freeShipActive && !freeShip.alcanzado && (
-          <div className="bg-accent/10 border border-accent/40 p-3 flex items-center gap-3">
+          <div className="bg-accent/5 border border-accent/40 p-3 flex items-center gap-3">
             <div className="flex-1">
-              <p className="text-xs font-semibold text-white">
+              <p className="text-xs font-semibold text-neutral-900">
                 Agrega {fmt(freeShip.faltante)} más y obtén envío gratis
               </p>
-              <div className="mt-1.5 h-1.5 bg-accent/20 overflow-hidden">
+              <div className="mt-1.5 h-1.5 bg-accent/15 overflow-hidden">
                 <div
                   className="h-full bg-accent-dark transition-all"
                   style={{ width: `${freeShip.progreso}%` }}
@@ -281,16 +288,16 @@ export default function CartPage() {
 
       {/* ── Resumen + dirección ─────────────────────── */}
       <div className="lg:col-span-1">
-        <div className="bg-superficie border border-white/10 p-5 sticky top-20 space-y-4">
-          <h2 className="text-base font-bold text-white pb-3 border-b border-white/10">Resumen del pedido</h2>
+        <div className="bg-white border border-neutral-200 p-5 sticky top-20 space-y-4">
+          <h2 className="text-base font-bold text-neutral-900 pb-3 border-b border-neutral-200">Resumen del pedido</h2>
 
           <div>
-            <p className="text-xs font-bold text-neutral-400 uppercase tracking-wider mb-2">Dirección de envío</p>
+            <p className="text-xs font-bold text-neutral-500 uppercase tracking-wider mb-2">Dirección de envío</p>
 
             {direcciones.length === 0 ? (
               <Link
                 to="/configuracion"
-                className="flex items-center justify-between gap-2 p-3 border border-dashed border-white/25 text-sm text-neutral-400 hover:border-accent hover:text-white transition-colors"
+                className="flex items-center justify-between gap-2 p-3 border border-dashed border-neutral-300 text-sm text-neutral-500 hover:border-accent hover:text-neutral-900 transition-colors"
               >
                 <div className="flex items-center gap-2">
                   <MapPin size={14} />
@@ -305,8 +312,8 @@ export default function CartPage() {
                     key={d.id}
                     className={`flex items-start gap-3 p-3 border cursor-pointer transition-colors ${
                       selectedDirId === d.id
-                        ? 'border-accent bg-superficie-2'
-                        : 'border-white/10 hover:border-white/25'
+                        ? 'border-accent bg-neutral-50'
+                        : 'border-neutral-200 hover:border-neutral-300'
                     }`}
                   >
                     <input
@@ -318,17 +325,17 @@ export default function CartPage() {
                       className="mt-0.5 flex-shrink-0 accent-black"
                     />
                     <div className="min-w-0">
-                      <p className="text-xs font-bold text-white leading-snug line-clamp-1">
+                      <p className="text-xs font-bold text-neutral-900 leading-snug line-clamp-1">
                         {d.direccion}{d.apartamento ? `, Apto ${d.apartamento}` : ''}
                       </p>
-                      <p className="text-[11px] text-neutral-400 mt-0.5">
+                      <p className="text-[11px] text-neutral-500 mt-0.5">
                         {[d.barrio, d.municipio, d.departamento].filter(Boolean).join(', ')}
                       </p>
                       <p className="text-[11px] text-neutral-500">{d.contactoNombre} · +57 {d.contactoTelefono}</p>
                     </div>
                   </label>
                 ))}
-                <Link to="/configuracion" className="block text-[11px] text-neutral-500 hover:text-white transition-colors mt-1">
+                <Link to="/configuracion" className="block text-[11px] text-neutral-500 hover:text-neutral-900 transition-colors mt-1">
                   + Agregar otra dirección
                 </Link>
               </div>
@@ -337,12 +344,12 @@ export default function CartPage() {
 
           <div className="space-y-2 text-sm">
             <div className="flex justify-between">
-              <span className="text-neutral-400">Subtotal ({count} art.)</span>
-              <span className="font-semibold">{fmt(total)}</span>
+              <span className="text-neutral-500">Subtotal ({count} art.)</span>
+              <span className="font-semibold text-neutral-900">{fmt(total)}</span>
             </div>
             <div className="flex justify-between">
-              <span className="text-neutral-400">Envío</span>
-              <span className={`font-semibold ${shipping === 0 ? 'text-accent' : ''}`}>
+              <span className="text-neutral-500">Envío</span>
+              <span className={`font-semibold ${shipping === 0 ? 'text-accent' : 'text-neutral-900'}`}>
                 {shippingContraEntrega ? 'Pagas contra entrega' : shipping === 0 ? 'Gratis' : fmt(shipping)}
               </span>
             </div>
@@ -353,20 +360,20 @@ export default function CartPage() {
             )}
           </div>
 
-          <div className="border-t border-white/10 pt-3 flex justify-between">
-            <span className="font-bold text-white">Total</span>
-            <span className="text-xl font-black text-white">{fmt(grandTotal)}</span>
+          <div className="border-t border-neutral-200 pt-3 flex justify-between">
+            <span className="font-bold text-neutral-900">Total</span>
+            <span className="text-xl font-black text-neutral-900">{fmt(grandTotal)}</span>
           </div>
 
           {/* Método de pago */}
-          <div className="border-t border-white/10 pt-3 space-y-2.5">
-            <p className="text-xs font-bold text-neutral-400 uppercase tracking-wider">Método de pago</p>
+          <div className="border-t border-neutral-200 pt-3 space-y-2.5">
+            <p className="text-xs font-bold text-neutral-500 uppercase tracking-wider">Método de pago</p>
             <div className="grid grid-cols-2 gap-2">
               <button
                 type="button"
                 onClick={() => setMetodo('wompi')}
                 className={`flex items-center justify-center gap-1.5 py-2.5 text-xs font-bold border transition-colors ${
-                  metodo === 'wompi' ? 'border-accent bg-superficie-2' : 'border-white/15 text-neutral-400 hover:border-white/40'
+                  metodo === 'wompi' ? 'border-accent bg-neutral-50 text-neutral-900' : 'border-neutral-200 text-neutral-500 hover:border-neutral-300'
                 }`}
               >
                 <ExternalLink size={13} /> Pagar con Wompi
@@ -375,7 +382,7 @@ export default function CartPage() {
                 type="button"
                 onClick={() => setMetodo('tarjeta')}
                 className={`flex items-center justify-center gap-1.5 py-2.5 text-xs font-bold border transition-colors ${
-                  metodo === 'tarjeta' ? 'border-accent bg-superficie-2' : 'border-white/15 text-neutral-400 hover:border-white/40'
+                  metodo === 'tarjeta' ? 'border-accent bg-neutral-50 text-neutral-900' : 'border-neutral-200 text-neutral-500 hover:border-neutral-300'
                 }`}
               >
                 <CreditCard size={13} /> Pagar con tarjeta
@@ -390,34 +397,34 @@ export default function CartPage() {
 
             {metodo === 'tarjeta' && (
               <div className="space-y-2.5 pt-1">
-                <FormField label="Número de tarjeta">
-                  <FormInput value={card.numero} onChange={setCardField('numero')} placeholder="4242 4242 4242 4242" />
+                <FormField light label="Número de tarjeta">
+                  <FormInput light value={card.numero} onChange={setCardField('numero')} placeholder="4242 4242 4242 4242" />
                 </FormField>
                 <div className="grid grid-cols-3 gap-2">
-                  <FormField label="Mes">
-                    <FormInput value={card.mes} onChange={setCardField('mes')} placeholder="08" maxLength={2} />
+                  <FormField light label="Mes">
+                    <FormInput light value={card.mes} onChange={setCardField('mes')} placeholder="08" maxLength={2} />
                   </FormField>
-                  <FormField label="Año">
-                    <FormInput value={card.anio} onChange={setCardField('anio')} placeholder="28" maxLength={2} />
+                  <FormField light label="Año">
+                    <FormInput light value={card.anio} onChange={setCardField('anio')} placeholder="28" maxLength={2} />
                   </FormField>
-                  <FormField label="CVV">
-                    <FormInput value={card.cvc} onChange={setCardField('cvc')} placeholder="123" maxLength={4} />
+                  <FormField light label="CVV">
+                    <FormInput light value={card.cvc} onChange={setCardField('cvc')} placeholder="123" maxLength={4} />
                   </FormField>
                 </div>
-                <FormField label="Titular de la tarjeta">
-                  <FormInput value={card.titular} onChange={setCardField('titular')} placeholder="Como aparece en la tarjeta" />
+                <FormField light label="Titular de la tarjeta">
+                  <FormInput light value={card.titular} onChange={setCardField('titular')} placeholder="Como aparece en la tarjeta" />
                 </FormField>
 
                 {acceptanceTokens ? (
                   <div className="space-y-1.5 pt-1">
-                    <label className="flex items-start gap-2 text-[11px] text-neutral-400">
+                    <label className="flex items-start gap-2 text-[11px] text-neutral-500">
                       <input type="checkbox" checked={acceptTerms} onChange={(e) => setAcceptTerms(e.target.checked)} className="mt-0.5 accent-black" />
                       Acepto los{' '}
                       <a href={acceptanceTokens.acceptance_permalink} target="_blank" rel="noopener noreferrer" className="underline">
                         términos y condiciones
                       </a>{' '}de Wompi
                     </label>
-                    <label className="flex items-start gap-2 text-[11px] text-neutral-400">
+                    <label className="flex items-start gap-2 text-[11px] text-neutral-500">
                       <input type="checkbox" checked={acceptDatos} onChange={(e) => setAcceptDatos(e.target.checked)} className="mt-0.5 accent-black" />
                       Autorizo el{' '}
                       <a href={acceptanceTokens.personal_auth_permalink} target="_blank" rel="noopener noreferrer" className="underline">
@@ -426,14 +433,14 @@ export default function CartPage() {
                     </label>
                   </div>
                 ) : (
-                  <p className="text-[11px] text-amber-400">Cargando datos de pago…</p>
+                  <p className="text-[11px] text-amber-600">Cargando datos de pago…</p>
                 )}
               </div>
             )}
           </div>
 
           {paymentError && (
-            <div className="p-3 bg-accent/10 border border-accent/40 text-xs text-red-400">{paymentError}</div>
+            <div className="p-3 bg-accent/5 border border-accent/40 text-xs text-red-600">{paymentError}</div>
           )}
 
           <button
@@ -441,7 +448,7 @@ export default function CartPage() {
             disabled={!canSubmit}
             className={`w-full py-3.5 font-bold text-sm transition-colors active:scale-95 flex items-center justify-center gap-2 ${
               !canSubmit
-                ? 'bg-superficie-2 text-neutral-500 cursor-not-allowed'
+                ? 'bg-neutral-100 text-neutral-400 cursor-not-allowed'
                 : 'bg-accent text-white hover:bg-accent-dark'
             }`}
           >
@@ -453,26 +460,26 @@ export default function CartPage() {
             }
           </button>
           {!selectedDir && !hasCartIssues && (
-            <p className="text-xs text-center text-amber-400">Selecciona una dirección de envío</p>
+            <p className="text-xs text-center text-amber-600">Selecciona una dirección de envío</p>
           )}
           {selectedDir && !hasDocumento && !hasCartIssues && (
-            <p className="text-xs text-center text-amber-400">
+            <p className="text-xs text-center text-amber-600">
               Registra tu número de cédula en{' '}
               <Link to="/configuracion" className="font-bold underline">Configuración</Link> para continuar
             </p>
           )}
 
           <div className="flex items-center gap-3">
-            <hr className="flex-1 border-white/10" />
+            <hr className="flex-1 border-neutral-200" />
             <span className="text-xs text-neutral-500">o</span>
-            <hr className="flex-1 border-white/10" />
+            <hr className="flex-1 border-neutral-200" />
           </div>
 
           <a
             href={`https://wa.me/573181767828?text=${waMessage}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center justify-center gap-2 w-full border-2 border-white/15 py-3 font-semibold text-sm text-neutral-200 hover:border-accent hover:text-white transition-colors active:scale-95"
+            className="flex items-center justify-center gap-2 w-full border-2 border-neutral-200 py-3 font-semibold text-sm text-neutral-600 hover:border-accent hover:text-neutral-900 transition-colors active:scale-95"
           >
             <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 text-green-500 flex-shrink-0" viewBox="0 0 24 24" fill="currentColor">
               <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
@@ -482,6 +489,7 @@ export default function CartPage() {
           <p className="text-xs text-center text-neutral-500">Un asesor coordinará el pago y envío</p>
         </div>
       </div>
+    </div>
     </div>
     </div>
   )

@@ -3,12 +3,12 @@ import { Loader2, PackageX, Upload, X } from 'lucide-react'
 import { pedidoService, uploadFotoDevolucion } from '../../../services/pedidoService'
 
 const ESTADO_INFO = {
-  pendiente: { label: 'Solicitud en revisión', color: 'text-amber-400' },
-  aprobada: { label: 'Devolución aprobada', color: 'text-green-400' },
-  rechazada: { label: 'Devolución rechazada', color: 'text-red-400' },
+  pendiente: { label: 'Solicitud en revisión', color: 'text-amber-600' },
+  aprobada: { label: 'Devolución aprobada', color: 'text-green-600' },
+  rechazada: { label: 'Devolución rechazada', color: 'text-red-600' },
   en_transito: { label: 'Devolución en tránsito', color: 'text-violet-700' },
-  recibida: { label: 'Devolución recibida', color: 'text-green-400' },
-  cancelada: { label: 'Solicitud cancelada', color: 'text-neutral-400' },
+  recibida: { label: 'Devolución recibida', color: 'text-green-600' },
+  cancelada: { label: 'Solicitud cancelada', color: 'text-neutral-500' },
 }
 
 export default function DevolucionPanel({ numero, estadoPedido }) {
@@ -95,13 +95,13 @@ export default function DevolucionPanel({ numero, estadoPedido }) {
   const info = devolucion ? ESTADO_INFO[devolucion.estado] : null
 
   return (
-    <div className="px-4 sm:px-5 pb-4 border-t border-white/10 pt-3">
+    <div className="px-4 sm:px-5 pb-4 border-t border-neutral-200 pt-3">
       {devolucion && (
         <div className="space-y-2 mb-2">
           <p className={`text-xs font-bold ${info.color}`}>{info.label}</p>
 
           {devolucion.estado === 'rechazada' && devolucion.adminNota && (
-            <p className="text-xs text-neutral-400">Motivo: {devolucion.adminNota}</p>
+            <p className="text-xs text-neutral-500">Motivo: {devolucion.adminNota}</p>
           )}
 
           {devolucion.estado === 'pendiente' && (
@@ -109,15 +109,15 @@ export default function DevolucionPanel({ numero, estadoPedido }) {
               type="button"
               onClick={handleCancelar}
               disabled={loading}
-              className="text-xs font-semibold text-neutral-500 hover:text-red-400 transition-colors disabled:opacity-60"
+              className="text-xs font-semibold text-neutral-500 hover:text-red-600 transition-colors disabled:opacity-60"
             >
               Cancelar solicitud
             </button>
           )}
 
           {(devolucion.estado === 'aprobada' || devolucion.estado === 'en_transito' || devolucion.estado === 'recibida') && devolucion.direccion && (
-            <div className="text-xs text-neutral-300 bg-superficie-2 p-3 space-y-0.5">
-              <p className="font-bold text-white">Enviar a: {devolucion.direccion.nombre}</p>
+            <div className="text-xs text-neutral-600 bg-neutral-100 p-3 space-y-0.5">
+              <p className="font-bold text-neutral-900">Enviar a: {devolucion.direccion.nombre}</p>
               <p>{devolucion.direccion.direccion}{devolucion.direccion.complemento ? `, ${devolucion.direccion.complemento}` : ''}</p>
               <p>{[devolucion.direccion.barrio, devolucion.direccion.municipio, devolucion.direccion.departamento].filter(Boolean).join(', ')}</p>
               {devolucion.direccion.contactoNombre && (
@@ -133,7 +133,7 @@ export default function DevolucionPanel({ numero, estadoPedido }) {
                 value={codigo}
                 onChange={(e) => setCodigo(e.target.value)}
                 placeholder="Número de guía del envío"
-                className="flex-1 border border-white/15 px-3 py-1.5 text-xs focus:outline-none focus:border-accent"
+                className="flex-1 bg-white text-neutral-900 border border-neutral-200 px-3 py-1.5 text-xs focus:outline-none focus:border-accent"
               />
               <button
                 type="button"
@@ -147,7 +147,7 @@ export default function DevolucionPanel({ numero, estadoPedido }) {
           )}
 
           {devolucion.estado === 'en_transito' && devolucion.codigoRastreo && (
-            <p className="text-xs text-neutral-400">Guía registrada: {devolucion.codigoRastreo}</p>
+            <p className="text-xs text-neutral-500">Guía registrada: {devolucion.codigoRastreo}</p>
           )}
         </div>
       )}
@@ -156,40 +156,40 @@ export default function DevolucionPanel({ numero, estadoPedido }) {
         <button
           type="button"
           onClick={() => setFormOpen(true)}
-          className="inline-flex items-center gap-1.5 text-xs font-bold text-white border border-white/15 px-3 py-1.5 hover:border-accent transition-colors"
+          className="inline-flex items-center gap-1.5 text-xs font-bold text-neutral-900 border border-neutral-200 px-3 py-1.5 hover:border-accent transition-colors"
         >
           <PackageX size={13} /> Solicitar devolución
         </button>
       )}
 
       {puedeSolicitar && formOpen && (
-        <div className="space-y-2 border border-white/15 p-3">
-          <p className="text-xs font-bold text-white">¿Qué pasó con tu pedido?</p>
+        <div className="space-y-2 border border-neutral-200 p-3">
+          <p className="text-xs font-bold text-neutral-900">¿Qué pasó con tu pedido?</p>
           <div className="flex gap-2">
             <button
               type="button"
               onClick={() => setTipo('retracto')}
-              className={`flex-1 text-xs font-semibold px-2 py-2 border transition-colors ${tipo === 'retracto' ? 'bg-accent text-white border-accent' : 'border-white/15 text-neutral-300 hover:border-accent'}`}
+              className={`flex-1 text-xs font-semibold px-2 py-2 border transition-colors ${tipo === 'retracto' ? 'bg-accent text-white border-accent' : 'border-neutral-200 text-neutral-600 hover:border-accent'}`}
             >
               Ya no lo quiero
             </button>
             <button
               type="button"
               onClick={() => setTipo('defecto')}
-              className={`flex-1 text-xs font-semibold px-2 py-2 border transition-colors ${tipo === 'defecto' ? 'bg-accent text-white border-accent' : 'border-white/15 text-neutral-300 hover:border-accent'}`}
+              className={`flex-1 text-xs font-semibold px-2 py-2 border transition-colors ${tipo === 'defecto' ? 'bg-accent text-white border-accent' : 'border-neutral-200 text-neutral-600 hover:border-accent'}`}
             >
               Tiene un defecto
             </button>
           </div>
           {tipo === 'retracto' && (
-            <p className="text-[11px] text-neutral-400 leading-relaxed">
+            <p className="text-[11px] text-neutral-500 leading-relaxed">
               Tienes 5 días hábiles desde la entrega para devolverlo y te reembolsamos el dinero
               (art. 47, Ley 1480 de 2011). El producto debe conservar su empaque y etiquetas, sin
               señales de uso. No hacemos cambios por talla, color o gusto — solo devolución.
             </p>
           )}
           {tipo === 'defecto' && (
-            <p className="text-[11px] text-neutral-400 leading-relaxed">
+            <p className="text-[11px] text-neutral-500 leading-relaxed">
               Cuéntanos el defecto y adjunta fotos — nuestro equipo de calidad lo revisa. Si se
               confirma que es de fábrica, asumimos el costo del envío del cambio.
             </p>
@@ -199,7 +199,7 @@ export default function DevolucionPanel({ numero, estadoPedido }) {
             onChange={(e) => setMotivo(e.target.value)}
             placeholder={tipo === 'defecto' ? 'Describe el defecto que notaste...' : 'Cuéntanos qué pasó con tu pedido...'}
             rows={3}
-            className="w-full border border-white/15 px-3 py-2 text-xs focus:outline-none focus:border-accent resize-none"
+            className="w-full bg-white text-neutral-900 border border-neutral-200 px-3 py-2 text-xs focus:outline-none focus:border-accent resize-none"
           />
           <div className="flex flex-wrap gap-2">
             {fotos.map((f, i) => (
@@ -218,7 +218,7 @@ export default function DevolucionPanel({ numero, estadoPedido }) {
               <button
                 type="button"
                 onClick={() => fileInputRef.current?.click()}
-                className="w-14 h-14 flex-shrink-0 border border-dashed border-white/25 flex items-center justify-center text-neutral-500 hover:border-accent hover:text-white transition-colors"
+                className="w-14 h-14 flex-shrink-0 border border-dashed border-neutral-300 flex items-center justify-center text-neutral-500 hover:border-accent hover:text-neutral-900 transition-colors"
               >
                 <Upload size={16} />
               </button>
@@ -237,7 +237,7 @@ export default function DevolucionPanel({ numero, estadoPedido }) {
             <button
               type="button"
               onClick={() => { setFormOpen(false); setError('') }}
-              className="text-xs font-semibold text-neutral-500 hover:text-white transition-colors"
+              className="text-xs font-semibold text-neutral-500 hover:text-neutral-900 transition-colors"
             >
               Cancelar
             </button>
@@ -245,7 +245,7 @@ export default function DevolucionPanel({ numero, estadoPedido }) {
         </div>
       )}
 
-      {error && <p className="text-xs text-red-400 mt-1.5">{error}</p>}
+      {error && <p className="text-xs text-red-600 mt-1.5">{error}</p>}
     </div>
   )
 }
