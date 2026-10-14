@@ -248,7 +248,7 @@ export default function RegisterPage() {
               </label>
               <input
                 type="text" value={numeroDocumento} onChange={(e) => setNumeroDocumento(e.target.value)}
-                placeholder="Si compraste antes en tienda física, úsala para ver tu historial"
+                placeholder="Es ogligatoria para los envios"
                 className="w-full px-4 py-3 border border-white/15 text-sm focus:outline-none focus:border-accent transition-colors"
               />
             </div>
