@@ -296,7 +296,7 @@ export default function CartPage() {
 
             {direcciones.length === 0 ? (
               <Link
-                to="/configuracion"
+                to="/configuracion?volver=carrito&tab=direcciones&falta=direccion"
                 className="flex items-center justify-between gap-2 p-3 border border-dashed border-neutral-300 text-sm text-neutral-500 hover:border-accent hover:text-neutral-900 transition-colors"
               >
                 <div className="flex items-center gap-2">
@@ -465,7 +465,7 @@ export default function CartPage() {
           {selectedDir && !hasDocumento && !hasCartIssues && (
             <p className="text-xs text-center text-amber-600">
               Registra tu número de cédula en{' '}
-              <Link to="/configuracion" className="font-bold underline">Configuración</Link> para continuar
+              <Link to="/configuracion?volver=carrito&tab=cuenta&falta=documento" className="font-bold underline">Configuración</Link> para continuar
             </p>
           )}
 
